@@ -1,11 +1,10 @@
 import { combineReducers, applyMiddleware, createStore } from "redux"
 import thunk from "redux-thunk"
-import { carouselReducer } from "./reducers/carouselReducer"
-
+import * as reducers from './reducers'
 
 const rootReducer = combineReducers({
     //state ứng dụng
-    carouselReducer,
+    ...reducers,
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunk))
