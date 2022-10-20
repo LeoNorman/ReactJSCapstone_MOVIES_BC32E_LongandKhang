@@ -2,7 +2,10 @@ import { Radio, Space, Tabs } from 'antd';
 import React, { useState } from 'react';
 
 
-const HomeMenu = () => {
+const HomeMenu = (props) => {
+    const {heThongRapChieu} = props
+    console.log("heThongRapChieu: ", heThongRapChieu);
+
     const [tabPosition, setTabPosition] = useState('left');
     const changeTabPosition = (e) => {
         setTabPosition(e.target.value);

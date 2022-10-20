@@ -1,13 +1,16 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import HomeMenu from './HomeMenu/HomeMenu'
 import { quanLyPhimReducer } from '../../redux/reducers'
 import Film from '../../components/Film/Film'
 import MultipleRowSlick from '../../components/ReactSlick/MultipleRowSlick'
+import { layDanhSachPhimAction } from '../../redux/actions/quanLyPhimAction'
+import { layDanhSachHeThongCumRapAcTion } from '../../redux/actions/quanLyRapAction'
 
 const Home = () => {
-
   const { arrFilm } = useSelector(state => state.quanLyPhimReducer)
+  const dispath = useDispatch()
+  const {heThongRapChieu} = useSelector(state => state.quanLyRapReducer)
   // console.log("arrFilm: ", arrFilm);
 
   // const renderFilm = () => {
@@ -16,6 +19,11 @@ const Home = () => {
 
   //   })
   // }
+  useEffect(() => {
+    const action = layDanhSachPhimAction()
+    dispath(action) // dispatch function từ redux THUNK
+    dispath(layDanhSachHeThongCumRapAcTion())
+  }, [])
 
   return (
     <div>
@@ -30,7 +38,7 @@ const Home = () => {
       </section>
 
       <div className='mx-36'>
-        <HomeMenu />
+        <HomeMenu heThongRapChieu={heThongRapChieu} />
       </div>
 
     </div>
