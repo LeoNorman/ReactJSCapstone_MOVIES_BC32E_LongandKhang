@@ -2,6 +2,7 @@ import { Carousel } from 'antd';
 import React,{useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
+import { getCarouselAction } from '../../../../redux/actions/carouselActions';
 
 
 export default function HomeCarousel(props) {
@@ -19,24 +20,31 @@ export default function HomeCarousel(props) {
     backgroundSize:'100%',
     backgroundRepeat:'no-repeat'
   };
-  useEffect(async ()=>{
-    try{
-      const result = await axios({
-        url:'https://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachBanner',
-        method:'GET',
-        headers:{
-          TokenCyberSoft:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzMkUiLCJIZXRIYW5TdHJpbmciOiIyMC8wMy8yMDIzIiwiSGV0SGFuVGltZSI6IjE2NzkyNzA0MDAwMDAiLCJuYmYiOjE2NTA0NzQwMDAsImV4cCI6MTY3OTQxODAwMH0.S7l5kogAVJjRW8mjJ5gosJraYq5ahYjrBwnMJAaGxlY'
-        }
-      });
-      //đưa lên reducer
-      //console.log('first',result)
-      dispatch({
-        type:'SET_CAROUSEL',
-        arrImg:result.data.content
-      })
-    }catch(errors){
-      console.log('errors',errors)
-    }
+  useEffect( ()=>{
+    // try{
+    //   const result = await axios({
+    //     url:'https://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachBanner',
+    //     method:'GET',
+    //     headers:{
+    //       TokenCyberSoft:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzMkUiLCJIZXRIYW5TdHJpbmciOiIyMC8wMy8yMDIzIiwiSGV0SGFuVGltZSI6IjE2NzkyNzA0MDAwMDAiLCJuYmYiOjE2NTA0NzQwMDAsImV4cCI6MTY3OTQxODAwMH0.S7l5kogAVJjRW8mjJ5gosJraYq5ahYjrBwnMJAaGxlY'
+    //     }
+    //   });
+    //   //đưa lên reducer
+    //   //console.log('first',result)
+    //   dispatch({
+    //     type:'SET_CAROUSEL',
+    //     arrImg:result.data.content
+    //   })
+    // }catch(errors){
+    //   console.log('errors',errors)
+    // }
+
+    //Kieu redux thunk
+    //tạo ra file riêng
+
+    //dispatch: (type,data), callBackfunction-> cai middLeware
+    
+    dispatch(getCarouselAction)
   },[])
   const renderImg=()=>{
     return arrImg.map((item,index)=>{
