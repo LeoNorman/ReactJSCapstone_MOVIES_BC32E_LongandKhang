@@ -4,10 +4,10 @@ import _ from 'lodash'
 
 const Footer = (props) => {
     const {heThongRapChieu} = useSelector(state => state.quanLyRapReducer) 
-    console.log("heThongRapChieu: ", heThongRapChieu);
+    // console.log("heThongRapChieu: ", heThongRapChieu);
     const arrHeThongRap = _.map(heThongRapChieu, (heThongRap) => _.pick(heThongRap, ['maHeThongRap', 'tenHeThongRap', 'logo']))
     
-    console.log("arrHeThongRap: ", arrHeThongRap);
+    // console.log("arrHeThongRap: ", arrHeThongRap);
     return (
         <div>
             <footer className="py-6 text-gray-100 bg-gray-900 mt-10">

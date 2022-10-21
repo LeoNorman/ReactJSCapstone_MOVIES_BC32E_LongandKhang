@@ -1,4 +1,4 @@
-import { Divider, Radio, Space, Tabs } from 'antd';
+import { Tabs } from 'antd';
 import moment from 'moment';
 import React, { Fragment, useState } from 'react';
 import { NavLink } from 'react-router-dom'
@@ -8,10 +8,8 @@ const HomeMenu = (props) => {
     const { hethongrapchieu } = props
     // console.log("heThongRapChieu: ", heThongRapChieu);
 
-    const [tabPosition, setTabPosition] = useState('left');
-    const changeTabPosition = (e) => {
-        setTabPosition(e.target.value);
-    };
+    const [tabPosition] = useState('left');
+
 
     return (
         //dùng thư viện antdesign, gõ từ khóa 'tabs'
