@@ -6,6 +6,7 @@ import Film from '../../components/Film/Film'
 import MultipleRowSlick from '../../components/ReactSlick/MultipleRowSlick'
 import { layDanhSachPhimAction } from '../../redux/actions/quanLyPhimAction'
 import { layDanhSachHeThongCumRapAcTion } from '../../redux/actions/quanLyRapAction'
+import HomeCarousel from '../../templates/HomeTemplate/Layout/HomeCarousel/HomeCarousel'
 
 const Home = () => {
   const { arrFilm } = useSelector(state => state.quanLyPhimReducer)
@@ -27,6 +28,7 @@ const Home = () => {
 
   return (
     <div>
+      <HomeCarousel />
       {/* thư viện tailblocks.cc */}
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">

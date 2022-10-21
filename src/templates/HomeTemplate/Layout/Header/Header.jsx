@@ -1,12 +1,13 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
+
 const Header = (props) => {
     return (
         // header của mamui.com
-            <header className="p-4 bg-opacity-40 bg-gray-600 text-white fixed w-full z-10">
+            <header className="px-4 bg-opacity-40 bg-gray-600 text-white fixed w-full z-10">
                 <div className="container flex justify-between h-16 mx-auto">
-                    <a rel="noopener noreferrer" href="#" aria-label="Back to homepage" className="flex items-center p-2">
+                    <a rel="noopener noreferrer" href="#" aria-label="Back to homepage" className="flex items-center p-2 w-40">
                         <img src="https://cyberlearn.vn/wp-content/uploads/2020/03/cyberlearn-min-new-opt2.png" alt="cyberlearn.vn" />
                     </a>
                     <ul className="items-stretch hidden space-x-3 lg:flex">
