@@ -36,7 +36,7 @@ const stateDefault = {
     dangChieu: true,
     sapChieu: false,
     arrFilmDefault: [],
-    filmDetail: [],
+    filmdetail: [],
 }
 
 export const quanLyPhimReducer = (state = stateDefault, {type, payload}) => {
@@ -62,7 +62,7 @@ export const quanLyPhimReducer = (state = stateDefault, {type, payload}) => {
         }
 
         case SET_CHI_TIET_PHIM: {
-            return {...state, filmDetail: payload}
+            return {...state, filmdetail: payload}
         }
 
         default: return {...state}

@@ -13,8 +13,8 @@ const HomeMenu = (props) => {
 
     return (
         //dùng thư viện antdesign, gõ từ khóa 'tabs'
-        <>
-            <Tabs hethongrapchieu={hethongrapchieu}
+        <div>
+            <Tabs style={{backgroundImage: 'url(https://t3.ftcdn.net/jpg/04/10/72/64/360_F_410726461_FDpDfV4DBgKZDMHUkAXRbTQ5PmkkrGlx.jpg)', backgroundPosition:'center', backgroundSize:'cover'}} hethongrapchieu={hethongrapchieu}
                 tabPosition={tabPosition}
                 items={hethongrapchieu.map((hethongrap, i) => {
                     const id = String(i + 1);
@@ -69,7 +69,7 @@ const HomeMenu = (props) => {
                     };
                 })}
             />
-        </>
+        </div>
     )
 }
 

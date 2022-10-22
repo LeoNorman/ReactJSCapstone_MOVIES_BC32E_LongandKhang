@@ -9,6 +9,9 @@
     "antd": "^4.23.5",
     "antd-mobile-icons": "^0.3.0",
     "axios": "^1.1.2",
+    "formik": "^2.2.9",
+    "formit": "^0.0.2",
+    "framer-motion": "^7.6.1",
     "history": "^4.10.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
@@ -21,7 +24,8 @@
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
     "slick-carousel": "^1.8.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
