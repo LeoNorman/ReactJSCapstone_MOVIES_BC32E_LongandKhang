@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { history } from '../../../../App'
 
 
 const Header = (props) => {
@@ -23,7 +24,10 @@ const Header = (props) => {
                         </li>
                     </ul>
                     <div className="items-center flex-shrink-0 hidden lg:flex">
-                        <button className="self-center px-8 py-3 rounded">Sign in</button>
+                        <button className="self-center px-8 py-3 rounded" onClick={() => {
+                            //Dùng history(import từ App.js) để chuyển hướng sang trang login
+                            history.push('/login')
+                        }}>Sign in</button>
                         <button className="self-center px-8 py-3 font-semibold rounded text-gray-50">Sign up</button>
                     </div>
                     <button className="p-4 lg:hidden">
