@@ -3,7 +3,7 @@ import './Detail.css'
 import '../../assets/circle.css'
 import { Tabs } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { layThongTinChiTietPhim } from '../../redux/actions/quanLyRapAction';
+import { layThongTinChiTietPhim, quanLyRapAction } from '../../redux/actions/quanLyRapAction';
 import moment from 'moment';
 import { Rate } from 'antd';
 
@@ -21,7 +21,7 @@ const Detail = (props) => {
     //Lấy thông tin params từ url
     let { id } = props.match.params
     // console.log("id: ", id);
-    dispatch(layThongTinChiTietPhim(id))
+    dispatch(quanLyRapAction.layThongTinChiTietPhim(id))
   }, [])
 
   return (

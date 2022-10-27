@@ -1,19 +1,13 @@
 import { GROUPID } from "../util/settings/config";
-import { baseService } from "./baseService";
+import { api } from "../constants/api"
 
+export const quanLyRapService = {
+    LayDanhSachHeThongRap: () => {
+        return api.get(`QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=${GROUPID}`)
+    },
 
-export class QuanLyRapService extends baseService{
-    constructor () {
-        super()
-    }
-
-    LayDanhSachHeThongRap = () => {
-        return this.get(`/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=${GROUPID}`)
-    }
-
-    LayThongTinLichChieuPhim = (maPhim) => {
-        return this.get(`/api/QuanLyRap/LayThongTinLichChieuPhim?maPhim=${maPhim}`)
-    }
+    LayThongTinLichChieuPhim: (maPhim) => {
+        return api.get(`QuanLyRap/LayThongTinLichChieuPhim?maPhim=${maPhim}`)
+    },
+    
 }
-
-export const quanLyRapService = new QuanLyRapService()
