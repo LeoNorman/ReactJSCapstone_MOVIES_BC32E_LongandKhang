@@ -23,7 +23,7 @@ function App() {
         <HomeTemplate path='/contact' exact Component={Contact} />
         <HomeTemplate path='/news' exact Component={News} />
         <HomeTemplate path='/detail/:id' exact Component={Detail} />
-        <Route path='/register' exact Component={Register} />
+        <CheckoutTemplate path='/register' exact Component={Register} />
 
         <CheckoutTemplate path="/checkout/:id" exact Component={Checkout}/>
         <UserTemplate path='/login' exact Component={Login} />

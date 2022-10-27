@@ -1,28 +1,29 @@
 import React from "react";
-import { useFormik } from "formik";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { dangNhapAction } from "../../redux/actions/QuanLynguoiDungAction";
+import { useForm } from "react-hook-form";
 export default function Login() {
   const dispatch = useDispatch();
 
   const { userLogin } = useSelector((state) => state.quanLyNguoiDungReducer);
 
-  console.log("userlogin", userLogin);
-  const formik = useFormik({
-    initialValues: {
-      taiKhoan: "",
-      matKhau: "",
-    },
-    onSubmit: (values) => {
-      const action = dangNhapAction(values);
-      dispatch(action);
-    },
-  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
+  console.log("userlogin", userLogin);
+  console.log("errors", errors);
   return (
     <form
-      onSubmit={formik.handleSubmit}
+      // onSubmit={formik.handleSubmit}
+      onSubmit={handleSubmit((data) => {
+        const action = dangNhapAction(data);
+        dispatch(action);
+        console.log("data", data);
+      })}
       className="lg:w-1/2 xl:max-w-screen-sm"
     >
       <div className="py-12 bg-indigo-100 lg:bg-white flex justify-center lg:justify-start lg:px-12">
@@ -78,10 +79,15 @@ export default function Login() {
               </div>
               <input
                 name="taiKhoan"
-                onChange={formik.handleChange}
+                {...register("taiKhoan", {
+                  required: true,
+                })}
                 className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
                 placeholder="Nhập vào tài khoản"
               />
+              {errors?.taiKhoan?.type === "required" && (
+                <p className="text-red-500">Chưa nhập tài khoản!</p>
+              )}
             </div>
             <div className="mt-8">
               <div className="flex justify-between items-center">
@@ -99,11 +105,16 @@ export default function Login() {
               </div>
               <input
                 name="matKhau"
-                onChange={formik.handleChange}
+                {...register("matKhau", {
+                  required: true,
+                })}
                 className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
                 type="password"
                 placeholder="Nhập mật vào khẩu"
               />
+              {errors?.matKhau?.type === "required" && (
+                <p className="text-red-500">Chưa nhập mật khẩu!</p>
+              )}
             </div>
             <div className="mt-10">
               <button
