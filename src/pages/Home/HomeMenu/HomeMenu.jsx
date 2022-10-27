@@ -53,7 +53,7 @@ const HomeMenu = (props) => {
                                                         <h3 className='ml-2 text-lg text-green-700'>{phim.tenPhim}</h3>
                                                         <div className='grid grid-cols-3 gap-2'>
                                                             {phim.lstLichChieuTheoPhim?.slice(0, 12).map((lichChieu, index) => {
-                                                                return <NavLink className='ml-2 text-xs text-orange-500' to='/' key={index}>
+                                                                return <NavLink className='ml-2 text-xs text-orange-500' to={`/checkout/${lichChieu.maLichChieu}`} key={index}>
                                                                     {moment(lichChieu.ngayChieuGioChieu).format('hh:mm A')}
                                                                 </NavLink>
                                                             })}

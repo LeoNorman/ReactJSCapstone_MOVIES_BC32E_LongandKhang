@@ -10,22 +10,35 @@ import Register from "./pages/Register/Register";
 import CheckoutTemplate from "./templates/CheckoutTemplate/CheckoutTemplate";
 import HomeTemplate from "./templates/HomeTemplate/HomeTemplate";
 import { Suspense, lazy } from 'react'
-import Loader from "./templates/HomeTemplate/Loader";
 import UserTemplate from "./templates/UserTemplate/UserTemplate";
+import Loading from "./components/Loading/Loading";
+import { useSelector } from "react-redux";
+import Profile from "./pages/Profile/Profile";
+import AdminTemplate from "./templates/AdminTemplate/AdminTemplate";
+import Dashboard from "./pages/Admin/Dashboard/Dashboard";
+import Films from "./pages/Admin/Films/Films";
+import Showtime from "./pages/Admin/Showtime/Showtime";
+import AddNew from "./pages/Admin/Films/AddNew/AddNew";
 
 const CheckoutTemplateLazy = lazy(() => import('./templates/CheckoutTemplate/CheckoutTemplate'))
 
 export const history = createBrowserHistory()
 
 function App() {
+
+  const {userLogin} = useSelector(state => state.quanLyNguoiDungReducer)
+  console.log("userLogin: ", userLogin);
+
   return (
     <Router history={history}>
+      <Loading />
       <Switch>
         <HomeTemplate path='/' exact Component={Home} />
         <HomeTemplate path='/home' exact Component={Home} />
         <HomeTemplate path='/contact' exact Component={Contact} />
         <HomeTemplate path='/news' exact Component={News} />
         <HomeTemplate path='/detail/:id' exact Component={Detail} />
+        <HomeTemplate path='/profile' exact Component={Profile} />
         <UserTemplate path='/login' exact Component={Login} />
         <CheckoutTemplate path='/checkout/:id' exact Component={Checkout} />
 
@@ -34,7 +47,12 @@ function App() {
           <CheckoutTemplateLazy path='/checkout/:id' exact Component={Checkout} />
         </Suspense> */}
 
-        <Route path='/register' exact component={Register} />
+        <UserTemplate path='/register' exact Component={Register} />
+        <AdminTemplate path='/admin' exact Component={Dashboard} />
+        <AdminTemplate path='/admin/films' exact Component={Films} />
+        <AdminTemplate path='/admin/films/addnew' exact Component={AddNew} />
+        <AdminTemplate path='/admin/users' exact Component={Dashboard} />
+        <AdminTemplate path='/admin/showtimes' exact Component={Showtime} />
       </Switch>
     </Router>
   );

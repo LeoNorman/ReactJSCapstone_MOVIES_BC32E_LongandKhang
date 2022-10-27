@@ -1,16 +1,14 @@
-import { GROUPID } from "../util/settings/config";
-import { baseService } from "./baseService";
+
+import { api } from "../constants/api"
 
 
-export class QuanLyNguoiDungService extends baseService{
-    constructor () {
-        super()
-    }
+export const quanLyNguoiDungService = {
+    dangNhap: (thongTinDangNhap) => {
+        return api.post(`QuanLyNguoiDung/DangNhap`, thongTinDangNhap)
+    },
 
-    dangNhap = (thongTinDangNhap) => {
-        return this.post(`/api/QuanLyNguoiDung/DangNhap`, thongTinDangNhap)
-    }
+    layThongTinNguoiDung: () => {
+        return api.post(`QuanLyNguoiDung/ThongTinTaiKhoan`)
+    },
 
 }
-
-export const quanLyNguoiDungService = new QuanLyNguoiDungService()

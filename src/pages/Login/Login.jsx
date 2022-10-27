@@ -2,7 +2,7 @@ import React from 'react'
 import { useFormik } from 'formik'
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { dangNhapAction } from '../../redux/actions/quanLyNguoiDungAction';
+import { quanLyNguoiDungAction } from '../../redux/actions/quanLyNguoiDungAction';
 
 const Login = () => {
 
@@ -11,18 +11,14 @@ const Login = () => {
   const { userLogin } = useSelector(state => state.quanLyNguoiDungReducer)
   console.log("userLogin: ", userLogin);
 
-  const {
-    handleSubmit,
-    handleChange,
-  } = useFormik({
+  const formik = useFormik({
     initialValues: {
-      taiKhoang: '',
+      taiKhoan: '',
       matKhau: '',
-      email: '',
     },
     onSubmit: values => {
 
-      const action = dangNhapAction(values)
+      const action = quanLyNguoiDungAction.dangNhapAction(values)
       dispatch(action)
 
       console.log("values: ", values);
@@ -37,7 +33,7 @@ const Login = () => {
       //   event.preventDefault()
       //   handleSubmit(event)
       // }
-      handleSubmit
+      formik.handleSubmit
     } className="lg:w-1/2 xl:max-w-screen-sm">
       <div className="py-12 bg-indigo-100 lg:bg-white flex justify-center lg:justify-start lg:px-12">
         <div className="cursor-pointer flex items-center">
@@ -61,7 +57,7 @@ const Login = () => {
           <div>
             <div>
               <div className="text-sm font-bold text-gray-700 tracking-wide">Tài khoảng</div>
-              <input name='taiKhoang' onChange={handleChange} className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" placeholder="Nhập tài khoảng" />
+              <input name='taiKhoan' onChange={formik.handleChange} className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" placeholder="Nhập tài khoảng" />
             </div>
             <div className="mt-8">
               <div className="flex justify-between items-center">
@@ -75,10 +71,10 @@ const Login = () => {
                   </a>
                 </div>
               </div>
-              <input type='password' name='matKhau' onChange={handleChange} className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" placeholder="Nhập mật khẩu" />
+              <input type='password' name='matKhau' onChange={formik.handleChange} className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" placeholder="Nhập mật khẩu" />
             </div>
             <div className="mt-10">
-              <button type='submit' className="bg-indigo-500 text-gray-100 p-4 w-full rounded-full tracking-wide
+              <button className="bg-indigo-500 text-gray-100 p-4 w-full rounded-full tracking-wide
                           font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600
                           shadow-lg">
                 Đăng nhập
@@ -86,7 +82,7 @@ const Login = () => {
             </div>
           </div>
           <div className="mt-12 text-sm font-display font-semibold text-gray-700 text-center">
-            Không có tài khoảng? <NavLink to='/register' className="cursor-pointer text-indigo-600 hover:text-indigo-800">Đăng ký</NavLink>
+            Không có tài khoảng? <NavLink to='register' className="cursor-pointer text-indigo-600 hover:text-indigo-800">Đăng ký</NavLink>
           </div>
         </div>
       </div>
