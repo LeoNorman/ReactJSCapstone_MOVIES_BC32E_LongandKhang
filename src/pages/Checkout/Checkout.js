@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { datVeAction, layChiTietPhongVeAction } from '../../redux/actions/QuanLyDatVeActions'
 import { CheckOutlined, CloseOutlined, UserOutlined ,SmileOutlined,HomeOutlined} from '@ant-design/icons'
 import './checkout.css'
-import { DAT_VE } from '../../redux/actions/types/QuanLyDatVeType'
+import { CHANGE_TAB_ACTIVE, CHUYEN_TAB, DAT_VE } from '../../redux/actions/types/QuanLyDatVeType'
 import { sortBy } from 'lodash'
 import { ThongTinDatVe } from '../../_core/models/ThongTinDatVe'
 import { Tabs } from 'antd';
 import { layThongTinNguoiDungAction } from '../../redux/actions/QuanLynguoiDungAction'
+import moment from 'moment'
+import _ from 'lodash'
 
 
 function Checkout(props) {
@@ -137,9 +139,17 @@ function Checkout(props) {
   )
 }
 
+
 export default function (props) {
+  const {tabActive}=useSelector(state=>state.QuanLyDatVeReducer)
+  const {dispatch}=useDispatch();
   return <div className='bg-slate-200 p5'>
-    <Tabs defaultActiveKey="1">
+    <Tabs defaultActiveKey='1' activeKey={tabActive.toString()} onChange={(key)=>{
+    // dispatch({
+    //   type:CHANGE_TAB_ACTIVE,
+    //   payload:key,
+    // })
+    }}>
       <Tabs.TabPane tab="01 Chọn Ghế & Thanh Toán" key="1">
           <Checkout {...props}/>
       </Tabs.TabPane>
@@ -159,6 +169,24 @@ function KetQuaDatve(props){
   
   },[])
   console.log('thongTinNguoiDung',thongTinNguoiDung)
+
+  const renDerTickitItem=()=>{
+    return thongTinNguoiDung.thongTinDatVe?.map((ticket,index)=>{
+      return <div className="p-2 lg:w-1/3 md:w-1/2 w-full" key={index}>
+      <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+        <img alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={ticket.hinhAnh}/>
+        <div className="flex-grow">
+          <h2 className="text-gray-900 title-font font-medium">{ticket.tenPhim}</h2>
+          <p className="text-gray-500">{moment(ticket.ngayDat).format('hh:mm A')}- {moment(ticket.ngayDat).format('DD-MM-YY')}</p>
+          <p>Địa điểm:{_.first(ticket.danhSachGhe).tenHeThongRap}-{_.first(ticket.danhSachGhe).tenCumRap}</p>
+          <p>Ghế:{ticket.danhSachGhe.map((ghe,index)=>{
+            return <span key={index}>[{ghe.tenGhe}]</span>
+          })}</p>
+        </div>
+      </div>
+    </div>
+    })
+  }
   return <div className='p-5'>
     <h3>Kết Quả Đặt vé!</h3>
     <section className="text-gray-600 body-font">
@@ -168,7 +196,8 @@ function KetQuaDatve(props){
       <p className="lg:w-2/3 mx-auto leading-relaxed text-base">Hãy xem thông tin để xem phim đúng giờ bạn nhé!!</p>
     </div>
     <div className="flex flex-wrap -m-2">
-      <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
+      {renDerTickitItem()}
+      {/* {<div className="p-2 lg:w-1/3 md:w-1/2 w-full">
         <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
           <img alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://picsum.photos/200/200" />
           <div className="flex-grow">
@@ -176,79 +205,7 @@ function KetQuaDatve(props){
             <p className="text-gray-500">10:10 Rạp 5 DXCenter</p>
           </div>
         </div>
-      </div>
-      <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-        <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-          <img alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/84x84" />
-          <div className="flex-grow">
-            <h2 className="text-gray-900 title-font font-medium">Henry Letham</h2>
-            <p className="text-gray-500">CTO</p>
-          </div>
-        </div>
-      </div>
-      <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-        <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-          <img alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/88x88" />
-          <div className="flex-grow">
-            <h2 className="text-gray-900 title-font font-medium">Oskar Blinde</h2>
-            <p className="text-gray-500">Founder</p>
-          </div>
-        </div>
-      </div>
-      <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-        <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-          <img alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/90x90" />
-          <div className="flex-grow">
-            <h2 className="text-gray-900 title-font font-medium">John Doe</h2>
-            <p className="text-gray-500">DevOps</p>
-          </div>
-        </div>
-      </div>
-      <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-        <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-          <img alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/94x94" />
-          <div className="flex-grow">
-            <h2 className="text-gray-900 title-font font-medium">Martin Eden</h2>
-            <p className="text-gray-500">Software Engineer</p>
-          </div>
-        </div>
-      </div>
-      <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-        <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-          <img alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/98x98" />
-          <div className="flex-grow">
-            <h2 className="text-gray-900 title-font font-medium">Boris Kitua</h2>
-            <p className="text-gray-500">UX Researcher</p>
-          </div>
-        </div>
-      </div>
-      <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-        <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-          <img alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/100x90" />
-          <div className="flex-grow">
-            <h2 className="text-gray-900 title-font font-medium">Atticus Finch</h2>
-            <p className="text-gray-500">QA Engineer</p>
-          </div>
-        </div>
-      </div>
-      <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-        <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-          <img alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/104x94" />
-          <div className="flex-grow">
-            <h2 className="text-gray-900 title-font font-medium">Alper Kamu</h2>
-            <p className="text-gray-500">System</p>
-          </div>
-        </div>
-      </div>
-      <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-        <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-          <img alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/108x98" />
-          <div className="flex-grow">
-            <h2 className="text-gray-900 title-font font-medium">Rodrigo Monchi</h2>
-            <p className="text-gray-500">Product Manager</p>
-          </div>
-        </div>
-      </div>
+</div>} */}
     </div>
   </div>
 </section>

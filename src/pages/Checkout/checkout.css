@@ -11,8 +11,8 @@
 
 
 .ghe{/*ghe thuong*/
-  width: 20px;
-  height: 20px;
+  width: 35px;
+  height: 35px;
   border: none;
   border-radius: 5px;
   cursor:pointer;
@@ -39,7 +39,7 @@
     border: 1px solid orange;
 }
 .gheKhachDat {
-  background-color: rgb(242, 25, 191) !important;
+  background-color: rgb(242, 25, 25) !important;
   cursor: no-drop
   ;
 }

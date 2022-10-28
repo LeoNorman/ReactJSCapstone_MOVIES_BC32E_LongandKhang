@@ -16,6 +16,7 @@ export const quanLyNguoiDungReducer=(state=stateDefault,action)=>{
     case DANG_NHAP:{
       const {thongTinDangNhap} = action;
       localStorage.setItem(USER_LOGIN,JSON.stringify(thongTinDangNhap));
+      localStorage.setItem(TOKEN,thongTinDangNhap.accessToken);
       return{...state,userLogin:thongTinDangNhap}
     }
     case SET_THONG_TIN_NGUOI_DUNG:{

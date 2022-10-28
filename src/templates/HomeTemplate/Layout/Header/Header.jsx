@@ -1,7 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { history } from "../../../../App";
+import { Select } from "antd";
+import { useTranslation } from "react-i18next";
+
+const { Option } = Select;
 const Header = (props) => {
+  const { t, i18n } = useTranslation();
+  const handleChange = (value) => {
+    i18n.changeLanguage(value);
+  };
   return (
     // header của mamui.com
     <header className="p-4 bg-opacity-40 bg-gray-600 text-white fixed w-full z-10">
@@ -60,7 +68,7 @@ const Header = (props) => {
               history.push("/login");
             }}
           >
-            Sign in
+            {t("signin")}
           </button>
           <button
             className="self-center px-8 py-3 font-semibold rounded text-gray-50"
@@ -68,7 +76,7 @@ const Header = (props) => {
               history.push("/register");
             }}
           >
-            Sign up
+            {t("signup")}
           </button>
         </div>
         <button className="p-4 lg:hidden">
@@ -87,6 +95,17 @@ const Header = (props) => {
             />
           </svg>
         </button>
+        <Select
+          defaultValue="en"
+          style={{
+            width: 120,
+          }}
+          onChange={handleChange}
+        >
+          <Option value="en">Eng</Option>
+          <Option value="chi">China</Option>
+          <Option value="vi">Việt nam</Option>
+        </Select>
       </div>
     </header>
   );
