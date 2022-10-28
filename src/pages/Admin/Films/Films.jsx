@@ -1,28 +1,28 @@
-import React, { Fragment, useDeferredValue, useEffect } from 'react'
-import { CalendarOutlined, DeleteOutlined, EditOutlined, SearchOutlined } from '@ant-design/icons';
-import { Button, Input, Space } from 'antd';
-import { Table } from 'antd';
+import React, { Fragment, useEffect } from 'react'
+import { Button, Table } from 'antd';
+
+import { Input, Space } from 'antd';
+import { AudioOutlined, EditOutlined, SearchOutlined, DeleteOutlined,CalendarOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { quanLyPhimAction } from '../../../redux/actions/quanLyPhimAction';
 import { NavLink } from 'react-router-dom';
 import { history } from '../../../App';
-
-
+import { quanLyPhimAction } from '../../../redux/actions/quanLyPhimAction';
 const { Search } = Input;
-const onSearch = (value) => console.log(value);
 
-const onChange = (pagination, filters, sorter, extra) => {
-    console.log('params', pagination, filters, sorter, extra);
-};
-const Films = () => {
+export default function Films() {
 
-    const {arrFilmDefault} = useSelector(state => state.quanLyPhimReducer)
-    console.log("arrFilmDefault: ", arrFilmDefault);
-    const dispatch = useDispatch()
+    const { arrFilmDefault } = useSelector(state => state.quanLyPhimReducer);
+
+    const dispatch = useDispatch();
+
+    console.log('arrFilmDefault', arrFilmDefault);
 
     useEffect(() => {
-        dispatch(quanLyPhimAction.layDanhSachPhimAction())
+        dispatch(quanLyPhimAction.layDanhSachPhimAction());
+
     }, [])
+
+
 
     const columns = [
         {
@@ -72,7 +72,7 @@ const Films = () => {
             // },
             render: (text, film) => {
                 return <Fragment>
-                    {film.moTa.length > 50 ? film.moTa.substr(0, 50) + '...' : film.moTa}
+                    {film.moTa.length > 50 ? film.moTa.substr(0, 50) + ' ...' : film.moTa}
                 </Fragment>
             },
             sortDirections: ['descend', 'ascend'],
@@ -88,13 +88,13 @@ const Films = () => {
                         //Gọi action xoá
                         if (window.confirm('Bạn có chắc muốn xoá phim ' + film.tenPhim)) {
                             //Gọi action
-                            // dispatch(xoaPhimAction(film.maPhim));
+                            dispatch(quanLyPhimAction.xoaPhimAction(film.maPhim));
                         }
 
 
                     }}><DeleteOutlined style={{ color: 'red' }} /> </span>
 
-                    <NavLink key={1} className=" mr-2 text-2xl" to={`/admin/films/showtime/${film.maPhim}/${film.tenPhim}`} onClick={()=>{
+                    <NavLink key={3} className=" mr-2 text-2xl" to={`/admin/films/showtime/${film.maPhim}/${film.tenPhim}`} onClick={()=>{
                         localStorage.setItem('filmParams',JSON.stringify(film));
                     }}><CalendarOutlined style={{ color: 'green' }} /> </NavLink>
                 </Fragment>
@@ -105,26 +105,39 @@ const Films = () => {
     ];
     const data = arrFilmDefault;
 
+
+
+    const onSearch = value => {
+
+        console.log(value);
+        //Gọi api layDanhSachPhim
+        dispatch(quanLyPhimAction.layDanhSachPhimAction(value));
+
+    };
+
+    function onChange(pagination, filters, sorter, extra) {
+        console.log('params', pagination, filters, sorter, extra);
+    }
+
     return (
-        <div className='container'>
-            <h3 className='text-4xl'>Quản lý phim</h3>
-            <Button className='mb-5' onClick={() => {
-                history.push('/admin/films/addnew')
-            }}>
-                Thêm phim
-            </Button>
-            <Space direction="vertical" className='w-full'>
-                <Search
-                    className='mb-5 w-full'
-                    placeholder="input search text"
-                    enterButton={<SearchOutlined />}
-                    size="large"
-                    onSearch={onSearch}
-                />
-            </Space>
-            <Table columns={columns} dataSource={data} onChange={onChange} />
+        <div>
+
+
+            <h3 className="text-4xl">Quản lý Phim</h3>
+            <Button className="mb-5" onClick={() => {
+                history.push('/admin/films/addnew');
+            }}>Thêm phim</Button>
+            {/* <Search placeholder="input search text" onSearch={onSearch} style={{ width: 200 }} /> */}
+            <Search
+                className="mb-5"
+                placeholder="input search text"
+                enterButton={<SearchOutlined />}
+                size="large"
+
+                onSearch={onSearch}
+            />
+
+            <Table columns={columns} dataSource={data} onChange={onChange} rowKey={"maPhim"} />
         </div>
     )
 }
-
-export default Films

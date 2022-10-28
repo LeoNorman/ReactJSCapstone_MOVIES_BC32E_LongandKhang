@@ -2,74 +2,73 @@ import { Tabs } from 'antd';
 import moment from 'moment';
 import React, { Fragment, useState } from 'react';
 import { NavLink } from 'react-router-dom'
+import { history } from '../../../App';
 
+
+const { TabPane } = Tabs
 
 const HomeMenu = (props) => {
-    const { hethongrapchieu } = props
-    // console.log("heThongRapChieu: ", heThongRapChieu);
+    const { heThongRapChieu } = props
+    console.log("heThongRapChieu: ", heThongRapChieu);
 
     const [tabPosition] = useState('left');
+
+    const renderHeThongRap = () => {
+        return heThongRapChieu?.map((heThongRap, index) => {
+            return <TabPane tab={<img src={heThongRap.logo} className="rounded-full" width="50" />} key={index}>
+                <Tabs tabPosition={tabPosition}>
+                    {heThongRap.lstCumRap?.map((cumRap, index) => {
+                        return <TabPane tab={
+                            <div style={{ width: '400px', display: 'flex', alignItems:'center' }} >
+                                <img src={cumRap.hinhAnh} width={50} /> <br />
+                                <div className="text-left ml-2">
+                                    {cumRap.tenCumRap}
+                                    <p className="text-red-500">{cumRap.diaChi}</p>
+                                </div>
+                            </div>
+                        }
+                            key={index}>
+                            {/*Load phim tương ứng */}
+                            {cumRap.danhSachPhim.slice(0, 4).map((phim, index) => {
+                                return <Fragment key={index}>
+                                    <div className="my-5" >
+                                        <div style={{ display: 'flex', alignItems:'center' }}>
+                                            <img style={{ height: 75, width: 75 }} src={phim.hinhAnh} alt={phim.tenPhim} onError={(e) => { e.target.onerror = null; e.target.src = "https://picsum.photos/75/75" }} />
+
+                                            <div className="ml-2">
+                                                <h1 className="text-2xl text-green-700" >{phim.tenPhim}</h1>
+                                                <div className="grid grid-cols-3 gap-6">
+                                                    {phim.lstLichChieuTheoPhim?.slice(0, 12).map((lichChieu, index) => {
+                                                        return <NavLink className="text-lg text-green-400" to={`/checkout/${lichChieu.maLichChieu}`} key={index}>
+                                                            {moment(lichChieu.ngayChieuGioChieu).format('hh:mm A')}
+                                                        </NavLink>
+                                                    })}
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                </Fragment>
+                            })}
+
+
+                        </TabPane>
+
+                    })}
+                </Tabs>
+            </TabPane>
+        })
+    }
 
 
     return (
         //dùng thư viện antdesign, gõ từ khóa 'tabs'
-        <div>
-            <Tabs style={{backgroundImage: 'url(https://t3.ftcdn.net/jpg/04/10/72/64/360_F_410726461_FDpDfV4DBgKZDMHUkAXRbTQ5PmkkrGlx.jpg)', backgroundPosition:'center', backgroundSize:'cover'}} hethongrapchieu={hethongrapchieu}
-                tabPosition={tabPosition}
-                items={hethongrapchieu.map((hethongrap, i) => {
-                    const id = String(i + 1);
-                    return {
-                        label: <img src={hethongrap.logo} className='rounded-full' width={50} alt={`${id}`} key={`${id}`} />,
-                        key: id,
-                        children: <Tabs hethongrap={hethongrap
-                        } tabPosition={tabPosition}
-                            // Phần Hệ Thống Rạp
-                            items={hethongrap.lstCumRap?.map((cumRap, index) => {
-                                return {
-                                    label: <div className='flex' style={{ width: '400px' }} key={index}>
-                                        <img src={cumRap.hinhAnh} alt={`${index}`} style={{ width: '50px', height: '50px' }} key={index} />
-                                        <br />
-                                        <div className='ml-2 text-left'>
-                                            <p>{cumRap.tenCumRap}</p>
-                                            <p>{cumRap.diaChi}</p>
-                                        </div>
-                                        <hr />
-                                    </div>,
-                                    key: index,
-                                    //Phần Cụm Rạp
-                                    children: <div>{cumRap.danhSachPhim?.slice(0, 5).map((phim, index) => {
-                                        return <Fragment key={index}>
-                                            <div className='my-5'>
-                                                <div className='flex'>
-                                                    {/* Do có 1 số hình bị lỗi nên tạm dùng onError */}
-                                                    {/* search từ khóa: 'onerror image react' */}
-                                                    <img src={phim.hinhAnh} width={75} style={{height:'75px'}} alt={phim.tenPhim} onError={(e) =>
-                                                        (e.target.onerror = null)(
-                                                            (e.target.src =
-                                                                "https://picsum.photos/75/75")
-                                                        )
-                                                    } />
-                                                    <div className='ml-2'>
-                                                        <h3 className='ml-2 text-lg text-green-700'>{phim.tenPhim}</h3>
-                                                        <div className='grid grid-cols-3 gap-2'>
-                                                            {phim.lstLichChieuTheoPhim?.slice(0, 12).map((lichChieu, index) => {
-                                                                return <NavLink className='ml-2 text-xs text-orange-500' to={`/checkout/${lichChieu.maLichChieu}`} key={index}>
-                                                                    {moment(lichChieu.ngayChieuGioChieu).format('hh:mm A')}
-                                                                </NavLink>
-                                                            })}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr />
-                                        </Fragment>
-                                    })}</div>,
-                                }
-                            })} />,
-                    };
-                })}
-            />
-        </div>
+        <Tabs tabPosition={tabPosition} style={{background:'#000'}}>
+            {renderHeThongRap()}
+        </Tabs>
     )
 }
 

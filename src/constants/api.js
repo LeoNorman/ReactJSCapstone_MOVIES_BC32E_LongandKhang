@@ -6,8 +6,7 @@ const TokenCyberSoft =
 
 const baseURL = 'https://movienew.cybersoft.edu.vn/api/'
 
-const Authorization = 'Bearer ' + USER_LOGIN.accessToken
-
+let Authorization = 'Bearer ' + JSON.parse(localStorage.getItem(USER_LOGIN)).accessToken
 
 
 export const api = axios.create()
