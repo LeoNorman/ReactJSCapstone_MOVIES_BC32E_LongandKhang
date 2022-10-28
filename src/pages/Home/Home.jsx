@@ -40,7 +40,7 @@ const Home = () => {
       </section>
 
       <div className='mx-36'>
-        <HomeMenu hethongrapchieu={heThongRapChieu} />
+        <HomeMenu heThongRapChieu={heThongRapChieu} />
       </div>
 
     </div>
