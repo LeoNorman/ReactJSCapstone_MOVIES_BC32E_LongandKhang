@@ -54,7 +54,7 @@ function App() {
         <AdminTemplate path='/admin/films/addnew' exact Component={AddNew} />
         <AdminTemplate path='/admin/films/edit/:id' exact Component={Edit} />
         <AdminTemplate path='/admin/users' exact Component={Dashboard} />
-        <AdminTemplate path='/admin/showtimes' exact Component={Showtime} />
+        <AdminTemplate path='/admin/films/showtime/:id/:tenPhim' exact Component={Showtime} />
       </Switch>
     </Router>
   );
