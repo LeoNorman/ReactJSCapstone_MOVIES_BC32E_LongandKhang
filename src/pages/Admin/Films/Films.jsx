@@ -94,8 +94,8 @@ export default function Films() {
 
                     }}><DeleteOutlined style={{ color: 'red' }} /> </span>
 
-                    <NavLink key={3} className=" mr-2 text-2xl" to={`/admin/films/showtime/${film.maPhim}/${film.tenPhim}`} onClick={()=>{
-                        localStorage.setItem('filmParams',JSON.stringify(film));
+                    <NavLink key={3} className=" mr-2 text-2xl" to={`/admin/films/showtime/${film.maPhim}/${film.tenPhim}`} onClick={() => {
+                        localStorage.setItem('filmParams',JSON.stringify(film))
                     }}><CalendarOutlined style={{ color: 'green' }} /> </NavLink>
                 </Fragment>
             },

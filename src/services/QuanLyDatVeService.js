@@ -21,5 +21,9 @@ export const quanLyDatVeService = {//mã lịch chiếu từ url
     
     datVe: (thongTinDatVe = new ThongTinDatVe()) => {
         return api.post(`QuanLyDatVe/DatVe`, thongTinDatVe)
+    },
+
+    taoLichChieu: (thongTinLichChieu) => {
+        return api.post(`QuanLyDatVe/TaoLichChieu`, thongTinLichChieu)
     }
 }
