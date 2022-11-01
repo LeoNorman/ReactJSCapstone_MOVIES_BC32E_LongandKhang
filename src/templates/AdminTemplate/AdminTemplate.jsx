@@ -26,7 +26,7 @@ const { Header, Sider, Content } = Layout;
 const AdminTemplate = (props) => {
     const { Component, ...restProps } = props
     const [collapsed, setCollapsed] = useState(false);
-    const {userLogin} = useSelector(state => state.quanLyNguoiDungReducer)
+    const { userLogin } = useSelector(state => state.quanLyNguoiDungReducer)
     const onCollapse = collapsed => {
         // console.log(collapsed);
         setCollapsed(collapsed);
@@ -39,15 +39,15 @@ const AdminTemplate = (props) => {
     })
 
     const operations = <Fragment>
-    {!_.isEmpty(userLogin) ? <Fragment> <button onClick={() => {
-        history.push('/profile')
-    }}> <div style={{ width: 50, height: 50, display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="text-2xl ml-5 rounded-full bg-red-200">{userLogin.taiKhoan.substr(0, 1)}</div>Hello! <span className='text-blue-500'>{userLogin.taiKhoan}</span></button> <button onClick={() => {
-        localStorage.removeItem(USER_LOGIN);
-        localStorage.removeItem(TOKEN);
-        history.push('/home');
-        window.location.reload();
-    }} className="text-blue-800">Đăng xuất</button> </Fragment> : ''}
-</Fragment>
+        {!_.isEmpty(userLogin) ? <Fragment> <button onClick={() => {
+            history.push('/profile')
+        }}> <div style={{ width: 50, height: 50, display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="text-2xl ml-5 rounded-full bg-red-200">{userLogin.taiKhoan.substr(0, 1)}</div>Hello! <span className='text-blue-500'>{userLogin.taiKhoan}</span></button> <button onClick={() => {
+            localStorage.removeItem(USER_LOGIN);
+            localStorage.removeItem(TOKEN);
+            history.push('/home');
+            window.location.reload();
+        }} className="text-blue-800">Đăng xuất</button> </Fragment> : ''}
+    </Fragment>
 
 
     return <Route {...restProps} render={(propsRoute) => {
@@ -58,10 +58,16 @@ const AdminTemplate = (props) => {
                         <img src="https://cyberlearn.vn/wp-content/uploads/2020/03/cyberlearn-min-new-opt2.png" alt="..." />
                     </div>
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-                        <Menu.Item key="1" icon={<UserOutlined />}>
-                            <NavLink to="/admin/users">Users</NavLink>
-                        </Menu.Item>
-                        <SubMenu key="sub1" icon={<FileOutlined />} title="Films">
+                        <SubMenu key="sub1" icon={<UserOutlined />} title="Users">
+                            <Menu.Item key="8" icon={<UserOutlined />}>
+                                <NavLink to="/admin/users">Users</NavLink>
+
+                            </Menu.Item>
+                            <Menu.Item key="9" icon={<FileOutlined />}>
+                                <NavLink to="/admin/users/adduser">Add user</NavLink>
+                            </Menu.Item>
+                        </SubMenu>
+                        <SubMenu key="sub2" icon={<FileOutlined />} title="Films">
                             <Menu.Item key="10" icon={<FileOutlined />}>
                                 <NavLink to="/admin/films">Films</NavLink>
 

@@ -27,5 +27,5 @@ export const quanLyPhimService = {
 
     xoaPhim: (maPhim) => {
         return api.delete(`QuanLyPhim/XoaPhim?MaPhim=${maPhim}`)
-    }
+    },
 }

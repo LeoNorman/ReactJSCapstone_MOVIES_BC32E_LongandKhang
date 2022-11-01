@@ -27,12 +27,12 @@ const AddNew = () => {
             tenPhim: '',
             trailer: '',
             moTa: '',
+            ngayKhoiChieu: '',
             dangChieu: false,
             sapChieu: false,
             hot: false,
             danhGia: 0,
             hinhAnh: {},
-            maNhom: GROUPID
         },
         onSubmit: (values) => {
             console.log("values: ", values);
@@ -52,6 +52,7 @@ const AddNew = () => {
     })
 
     const handleChangeDatePicker = (value) => {
+        // console.log("value: ", value);
         let ngayKhoiChieu = moment(value).format('DD/MM/YYYY')
         formik.setFieldValue('ngayKhoiChieu', ngayKhoiChieu)
     }

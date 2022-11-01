@@ -4,6 +4,7 @@ import {
     Input,
     InputNumber,
     Radio,
+    Space,
     Switch,
 } from 'antd';
 import { useFormik } from 'formik';
@@ -62,13 +63,9 @@ const Edit = (props) => {
     })
 
     const handleChangeDatePicker = (value) => {
-        formik.setFieldValue('ngayKhoiChieu', moment(value))
-        console.log('handleChangeDatePicker: ', moment(value));
-    }
-
-    const onOk = (value) => {
-        formik.setFieldValue('ngayKhoiChieu', moment(value))
-        console.log('onOk: ', moment(value));
+        // console.log("value: ", moment(value).format('DD/MM/YYYY')
+        let ngayKhoiChieu = moment(value)
+        return formik.setFieldValue('ngayKhoiChieu', ngayKhoiChieu)
     }
 
     const handleChangeSwitch = (name) => {
@@ -138,7 +135,7 @@ const Edit = (props) => {
                 <Input name='moTa' onChange={formik.handleChange} value={formik.values.moTa} />
             </Form.Item>
             <Form.Item label="Ngày khởi chiếu">
-                <DatePicker format='DD/MM/YYYY' showTime onChange={handleChangeDatePicker} onOk={onOk} value={moment(formik.values.ngayKhoiChieu)} />
+                <DatePicker format={'DD-MM-YYYY'} onChange={handleChangeDatePicker} value={moment(formik.values.ngayKhoiChieu)} />
             </Form.Item>
             <Form.Item label="Đang chiếu">
                 <Switch onChange={handleChangeSwitch('dangChieu')} checked={formik.values.dangChieu} />

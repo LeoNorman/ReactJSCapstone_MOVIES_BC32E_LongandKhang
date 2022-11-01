@@ -130,7 +130,7 @@ export default function Films() {
             {/* <Search placeholder="input search text" onSearch={onSearch} style={{ width: 200 }} /> */}
             <Search
                 className="mb-5"
-                placeholder="input search text"
+                placeholder="Nhập thông tin phim"
                 enterButton={<SearchOutlined />}
                 size="large"
 
