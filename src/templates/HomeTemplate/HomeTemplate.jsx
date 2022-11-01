@@ -11,7 +11,7 @@ const HomeTemplate = (props) => {
     //scroll to top javascript
     window.scrollTo(0, 0)
 
-  })
+  }, [])
 
   return <Route {...restProps} render={(propsRoute) => {
     return <Fragment>

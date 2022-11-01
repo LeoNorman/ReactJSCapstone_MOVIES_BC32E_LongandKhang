@@ -11,7 +11,6 @@ import { CheckOutlined, SmileOutlined, UserOutlined } from '@ant-design/icons'
 import { Tabs } from 'antd';
 import { quanLyNguoiDungAction } from '../../redux/actions/quanLyNguoiDungAction';
 import moment from 'moment';
-import { connection } from '../..';
 import { history } from '../../App';
 import { NavLink } from 'react-router-dom';
 import { TOKEN, USER_LOGIN } from '../../util/settings/config';

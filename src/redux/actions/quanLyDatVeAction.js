@@ -2,6 +2,7 @@ import { connection } from "../..";
 import { quanLyDatVeService } from "../../services/QuanLyDatVeService";
 import { ThongTinDatVe } from "../../_core/models/ThongTinDatVe";
 import { displayLoadingAction, hideLoadingAction } from "./loadingAction";
+import { quanLyNguoiDungAction } from "./quanLyNguoiDungAction";
 import { DISPLAY_LOADING, HIDE_LOADING } from "./types/loadingType";
 import { CHUYEN_TAB, DAT_VE, DAT_VE_HOAN_TAT, SET_CHI_TIET_PHONG_VE } from "./types/quanLyDatVeType";
 
@@ -35,6 +36,7 @@ export const quanLyDatVeAction = {
                 //khi đặt vé thành công thì phải load lại phòng vé
                 await dispatch(quanLyDatVeAction.layChiTietPhongVeAction(thongTinDatVe.maLichChieu))
                 await dispatch({ type: DAT_VE_HOAN_TAT })
+                await dispatch(quanLyNguoiDungAction.layThongTinNguoiDungAction())
                 await dispatch(hideLoadingAction)
 
                 // let userLogin = getState().QuanLyNguoiDungReducer.userLogin;
@@ -43,42 +45,11 @@ export const quanLyDatVeAction = {
                 dispatch({ type: CHUYEN_TAB })
 
             } catch (errors) {
-                console.log('errors: ', errors);
                 console.log('errors: ', errors.reponse?.data);
             }
         }
         
     },
 
-    // datGheAction: (ghe,maLichChieu) => {
-
-
-    //     return async (dispatch,getState) => {
-    
-    //         //Đưa thông tin ghế lên reducer
-    //         await dispatch({
-    //             type: DAT_VE,
-    //             gheDuocChon: ghe
-    //         });
-    
-    //         //Call api về backend 
-    //         let danhSachGheDangDat = getState().quanLyDatVeReducer.danhSachGheDangDat;
-    //         let taiKhoan = getState().quanLyNguoiDungReducer.userLogin.taiKhoan;
-    
-    //         console.log('danhSachGheDangDat',danhSachGheDangDat);
-    //         console.log('taiKhoan',taiKhoan);
-    //         console.log('maLichChieu',maLichChieu);
-    //         //Biến mảng thành chuỗi
-    //         danhSachGheDangDat = JSON.stringify(danhSachGheDangDat);
-    
-    //         //Call api signalR
-    //         connection.invoke('datGhe',taiKhoan,danhSachGheDangDat,maLichChieu);
-    
-    
-    
-    
-    //     }
-    
-    // }
 
 }
