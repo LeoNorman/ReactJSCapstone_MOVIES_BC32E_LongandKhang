@@ -1,5 +1,5 @@
-import axios from "axios";
-import { quanLyPhimService } from "../../services/QuanLyPhimService";
+
+import { quanLyPhimService } from "../../services/quanLyPhimService";
 import { SET_CAROUSEL } from "./types/carouselType";
 
 
