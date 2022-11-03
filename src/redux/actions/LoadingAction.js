@@ -1,4 +1,4 @@
-import { DISPLAY_LOADING, HIDE_LOADING } from "./types/LoadingType";
+import { DISPLAY_LOADING, HIDE_LOADING } from "./types/loadingType";
 
 export const displayLoadingAction = {
     type: DISPLAY_LOADING

@@ -1,16 +1,21 @@
-import { api } from "../contants/api";
 import { GROUPID } from "../util/settings/config";
-import { baseService } from "./baseService";
+import { api } from "../constants/api"
+import { ApiTwoTone } from "@ant-design/icons";
 
+export const quanLyRapService = {
+    LayDanhSachHeThongRap: () => {
+        return api.get(`QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=${GROUPID}`)
+    },
 
-export class QuanLyRapService extends baseService{
-    constructor () {
-        super()
-    }
+    LayThongTinLichChieuPhim: (maPhim) => {
+        return api.get(`QuanLyRap/LayThongTinLichChieuPhim?maPhim=${maPhim}`)
+    },
+    
+    LayThongTinHeThongRap: () => {
+        return api.get(`QuanLyRap/LayThongTinHeThongRap`)
+    },
 
-    LayDanhSachHeThongRap = () => {
-        return api.get(`/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=${GROUPID}`)
+    LayThongTinCumRap: (maHeThongRap) => {
+        return api.get(`QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=${maHeThongRap}`)
     }
 }
-
-export const quanLyRapService = new QuanLyRapService()

@@ -1,33 +1,28 @@
-import React, { Fragment } from "react";
-import { useEffect } from "react";
-import { Route } from "react-router";
-import Footer from "./Layout/Footer/Footer";
-import Header from "./Layout/Header/Header";
-import HomeCarousel from "./Layout/HomeCarousel/HomeCarousel";
+import React, { Fragment, useEffect } from 'react'
+import { Route } from 'react-router'
+import Footer from './Layout/Footer/Footer'
+import Header from './Layout/Header/Header'
+import HomeCarousel from './Layout/HomeCarousel/HomeCarousel'
 
 const HomeTemplate = (props) => {
-  const { Component, ...restProps } = props;
-  console.log("hometemplate", props);
+  const { Component, ...restProps } = props
+
   useEffect(() => {
-    window.scrollTo(0, 0);
-  });
-  return (
-    <Route
-      {...restProps}
-      render={(propsRoute) => {
-        return (
-          <Fragment>
-            <Header {...propsRoute} />
-            <HomeCarousel {...propsRoute} />
+    //scroll to top javascript
+    window.scrollTo(0, 0)
 
-            <Component {...propsRoute} />
+  }, [])
 
-            <Footer />
-          </Fragment>
-        );
-      }}
-    />
-  );
-};
+  return <Route {...restProps} render={(propsRoute) => {
+    return <Fragment>
+      <Header {...propsRoute} />
 
-export default HomeTemplate;
+      <Component {...propsRoute} />
+
+      <Footer />
+    </Fragment>
+  }} />
+}
+
+export default HomeTemplate
+

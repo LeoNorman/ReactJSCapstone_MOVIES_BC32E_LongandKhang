@@ -1,9 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { dangNhapAction } from "../../redux/actions/QuanLynguoiDungAction";
+import { quanLyNguoiDungAction } from "../../redux/actions/quanLyNguoiDungAction";
 import { useForm } from "react-hook-form";
-export default function Login() {
+const Login = () => {
   const dispatch = useDispatch();
 
   const { userLogin } = useSelector((state) => state.quanLyNguoiDungReducer);
@@ -18,9 +18,8 @@ export default function Login() {
   console.log("errors", errors);
   return (
     <form
-      // onSubmit={formik.handleSubmit}
       onSubmit={handleSubmit((data) => {
-        const action = dangNhapAction(data);
+        const action = quanLyNguoiDungAction.dangNhapAction(data);
         dispatch(action);
         console.log("data", data);
       })}
@@ -139,4 +138,6 @@ export default function Login() {
       </div>
     </form>
   );
-}
+};
+
+export default Login;

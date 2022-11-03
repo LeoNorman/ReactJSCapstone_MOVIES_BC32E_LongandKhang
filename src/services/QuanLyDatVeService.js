@@ -1,15 +1,29 @@
-import { api } from "../contants/api";
-import { ThongTinDatVe } from "../_core/models/ThongTinDatVe";
-export class QuanLyDatVeService{
-    constructor () {
-    }
 
-    layChiTietPhongVe = (maLichChieu) => {//max lich chiếu lấy từ url
-        return api.get(`api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${maLichChieu}`)
-    }
-    datVe=(thongTinDatVe=new ThongTinDatVe())=>{
-        return api.post(`api/QuanLyDatVe/DatVe`,thongTinDatVe)
+import { api } from "../constants/api"
+import { ThongTinDatVe } from "../_core/models/ThongTinDatVe"
+
+
+export const quanLyDatVeService = {//mã lịch chiếu từ url
+    layChiTietPhongVe: (maLichChieu) => {
+        return api.get(`QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${maLichChieu}`)
+
+    },
+
+    // thongTinDatVe = {
+    //     "maLichChieu": 0,
+    //     "danhSachVe": [
+    //         {
+    //             "maGhe": 0,
+    //             "giaVe": 0
+    //         }
+    //     ]
+    // }
+    
+    datVe: (thongTinDatVe = new ThongTinDatVe()) => {
+        return api.post(`QuanLyDatVe/DatVe`, thongTinDatVe)
+    },
+
+    taoLichChieu: (thongTinLichChieu) => {
+        return api.post(`QuanLyDatVe/TaoLichChieu`, thongTinLichChieu)
     }
 }
-
-export const quanLyDatVeService = new QuanLyDatVeService()

@@ -1,7 +1,7 @@
-export class ThongTinDatVe{
-  maLichChieu=0;
-  danhSachve=[];
-  constructor(){
-    
-  }
+export class ThongTinDatVe {
+    maLichChieu = 0;
+    danhSachVe = [];
+    constructor () {
+        
+    }
 }

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Carousel } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCarouselAction } from '../../../../redux/actions/carouselActions';
+import { carouselAction } from '../../../../redux/actions/carouselActions';
 import './HomeCarousel.css'
 
 const contentStyle = {
@@ -26,7 +26,7 @@ const HomeCarousel = (props) => {
 
         //1 action = {type:'', data}
         //2 (phải cài Middleware): callBackFunction (dispatch)
-        dispatch(getCarouselAction(1))
+        dispatch(carouselAction.getCarouselAction())
     }, [])
 
 
