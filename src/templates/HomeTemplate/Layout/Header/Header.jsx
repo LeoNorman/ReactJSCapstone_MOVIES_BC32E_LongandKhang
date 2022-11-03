@@ -1,14 +1,52 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import { history } from "../../../../App";
 import { Select } from "antd";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import _ from "lodash";
 
 const { Option } = Select;
 const Header = (props) => {
+  const { userLogin } = useSelector((state) => state.quanLyNguoiDungReducer);
   const { t, i18n } = useTranslation();
   const handleChange = (value) => {
     i18n.changeLanguage(value);
+  };
+
+  const renderLogin = () => {
+    if (_.isEmpty(userLogin)) {
+      return (
+        <Fragment>
+          <button
+            className="self-center px-8 py-3 rounded"
+            onClick={() => {
+              history.push("/login");
+            }}
+          >
+            {t("signin")}
+          </button>
+          <button
+            className="self-center px-8 py-3 font-semibold rounded text-gray-50"
+            onClick={() => {
+              history.push("/register");
+            }}
+          >
+            {t("register")}
+          </button>
+        </Fragment>
+      );
+    }
+    return (
+      <button
+        className="self-center px-8 py-3 rounded"
+        onClick={() => {
+          history.push("/profile");
+        }}
+      >
+        Hello ! {userLogin.taiKhoan}
+      </button>
+    );
   };
   return (
     // header của mamui.com
@@ -62,39 +100,8 @@ const Header = (props) => {
           </li>
         </ul>
         <div className="items-center flex-shrink-0 hidden lg:flex">
-          <button
-            className="self-center px-8 py-3 rounded"
-            onClick={() => {
-              history.push("/login");
-            }}
-          >
-            {t("signin")}
-          </button>
-          <button
-            className="self-center px-8 py-3 font-semibold rounded text-gray-50"
-            onClick={() => {
-              history.push("/register");
-            }}
-          >
-            {t("signup")}
-          </button>
+          {renderLogin()}
         </div>
-        <button className="p-4 lg:hidden">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            className="w-6 h-6 text-gray-800"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        </button>
         <Select
           defaultValue="en"
           style={{

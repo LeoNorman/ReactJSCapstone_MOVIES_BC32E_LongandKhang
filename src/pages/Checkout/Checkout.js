@@ -10,6 +10,9 @@ import { Tabs } from 'antd';
 import { layThongTinNguoiDungAction } from '../../redux/actions/QuanLynguoiDungAction'
 import moment from 'moment'
 import _ from 'lodash'
+import { history } from '../../App'
+import { TOKEN, USER_LOGIN } from '../../util/settings/config'
+import { NavLink } from 'react-router-dom'
 
 
 function Checkout(props) {
@@ -140,15 +143,32 @@ function Checkout(props) {
 }
 
 
-export default function (props) {
+const Tab = (props)=>{
   const {tabActive}=useSelector(state=>state.QuanLyDatVeReducer)
   const {dispatch}=useDispatch();
+  const {userLogin}=useSelector(state=>state.quanLyNguoiDungReducer)
+
+  useEffect(() => {
+    return () => {
+      dispatch({
+        type: CHANGE_TAB_ACTIVE,
+        payload: 1
+      })
+    }
+  }, [])
+  const operations=<Fragment>
+          {!_.isEmpty(userLogin)?<Fragment><button onClick={()=>{
+            history.push('/profile')
+          }}><div style={{width:40,height:40,display:'flex',justifyContent:'center',alignItems:'center'}} className='rounded-full bg-red-300 text-2xl'>{userLogin.taiKhoan.substr(0,1)}</div>Hello !! {userLogin.taiKhoan}</button><button onClick={()=>{
+            localStorage.removeItem(USER_LOGIN);
+            localStorage.removeItem(TOKEN);
+            history.push('/home');
+            window.location.reload();
+          }}>LogOut</button></Fragment>:''}
+  </Fragment>
   return <div className='bg-slate-200 p5'>
-    <Tabs defaultActiveKey='1' activeKey={tabActive.toString()} onChange={(key)=>{
-    // dispatch({
-    //   type:CHANGE_TAB_ACTIVE,
-    //   payload:key,
-    // })
+    <Tabs  tabBarExtraContent={operations} defaultActiveKey='1' activeKey={tabActive.toString()} onChange={(key)=>{
+    console.log(key)
     }}>
       <Tabs.TabPane tab="01 Chọn Ghế & Thanh Toán" key="1">
           <Checkout {...props}/>
@@ -156,9 +176,13 @@ export default function (props) {
       <Tabs.TabPane tab="02 Kết quả đặt vé" key="2">
           <KetQuaDatve {...props}/>
       </Tabs.TabPane>
+      <Tabs.TabPane tab={<NavLink className='text-lg text-white' to='/home'><HomeOutlined/>home</NavLink>} key='3'>
+
+      </Tabs.TabPane>
     </Tabs>
   </div>
-}
+};
+export default Tab;
 function KetQuaDatve(props){
 
   const dispatch=useDispatch();
