@@ -1,4 +1,4 @@
-import { quanLyPhimService } from "../../services/QuanLyPhimService";
+import { quanLyPhimService } from "../../services/quanLyPhimService";
 import { SET_DANH_SACH_PHIM, SET_THONG_TIN_PHIM_EDIT } from "./types/quanLyPhimType";
 import { history } from '../../App'
 
