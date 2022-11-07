@@ -50,17 +50,18 @@ export const quanLyPhimAction = {
         }
     },
 
-    capNhatPhimUploadAction: (formData) => {
+    capNhatPhimUploadAction: (formData, maPhim) => {
         return async (dispatch) => {
-
             try {
                 let result = await quanLyPhimService.capNhatPhimUpload(formData)
                 alert('Cập nhật phim thành công!')
                 console.log('result: ', result.data.content);
+                await dispatch(quanLyPhimAction.layThongTinPhimEditAction(maPhim))
                 dispatch(quanLyPhimAction.layDanhSachPhimAction())
                 history.push('/admin/films')
             } catch (errors) {
                 console.log("errors: ", errors.reponse?.data);
+                alert('không thể cập nhật phim này!')
             }
         }
     },

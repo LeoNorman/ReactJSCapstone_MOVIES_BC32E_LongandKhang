@@ -1,24 +1,21 @@
-import React, { Fragment, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { quanLyDatVeAction } from "../../redux/actions/quanLyDatVeAction";
-import style from "./Checkout.module.css";
-import "./Checkout.css";
-import {
-  CHANGE_TAB_ACTIVE,
-  DAT_VE,
-} from "../../redux/actions/types/quanLyDatVeType";
-import _ from "lodash";
-import { ThongTinDatVe } from "../../_core/models/ThongTinDatVe";
-import { CheckOutlined, SmileOutlined, UserOutlined } from "@ant-design/icons";
-import { Tabs } from "antd";
-import { quanLyNguoiDungAction } from "../../redux/actions/quanLyNguoiDungAction";
-import moment from "moment";
-import { history } from "../../App";
-import { NavLink } from "react-router-dom";
-import { TOKEN, USER_LOGIN } from "../../util/settings/config";
-
+import React, { Fragment, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { quanLyDatVeAction } from '../../redux/actions/quanLyDatVeAction';
+import style from './Checkout.module.css'
+import './Checkout.css'
+import { CHANGE_TAB_ACTIVE, DAT_VE } from '../../redux/actions/types/quanLyDatVeType';
+import _ from 'lodash'
+import { ThongTinDatVe } from '../../_core/models/ThongTinDatVe';
+import { CheckOutlined, SmileOutlined, UserOutlined } from '@ant-design/icons'
+import { Tabs } from 'antd';
+import { quanLyNguoiDungAction } from '../../redux/actions/quanLyNguoiDungAction';
+import moment from 'moment';
+import { history } from '../../App';
+import { NavLink } from 'react-router-dom';
+import { ACCESS_TOKEN, USER_LOGIN } from '../../util/settings/config';
 const Checkout = (props) => {
   const { userLogin } = useSelector((state) => state.quanLyNguoiDungReducer);
+  
   // console.log("userLogin: ", userLogin);
 
   const { chiTietPhongVe, danhSachGheDangDat, danhSachGheKhachDat } =
@@ -291,10 +288,44 @@ const App = (props) => {
     return () => {
       dispatch({
         type: CHANGE_TAB_ACTIVE,
-        payload: 1,
-      });
-    };
-  }, []);
+        payload: 1
+      })
+    }
+  }, [])
+
+  const operations = <Fragment>
+    {!_.isEmpty(userLogin) ?
+      <Fragment>
+        <button onClick={() => {
+          history.push('/profile')
+        }}>
+          <div style={{ width: 50, height: 50, display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="text-2xl ml-3 rounded-full bg-blue-500">{userLogin.taiKhoan.substr(0, 1)}
+          </div>Hello ! <span className='text-orange-500'>{userLogin.taiKhoan}</span></button>
+        <button className="text-green-500" onClick={()=>{
+            localStorage.removeItem(USER_LOGIN);
+            localStorage.removeItem(ACCESS_TOKEN);
+            history.push('/home');
+            window.location.reload();
+        }}>Đăng xuất</button>
+      </Fragment>
+       : ''}
+
+
+  </Fragment>
+  return <div className='p-5 bg-black'>
+    <Tabs tabBarExtraContent={operations} defaultActiveKey='1' activeKey={tabActive.toString()} onChange={(key) => {
+      dispatch({
+        type: CHANGE_TAB_ACTIVE,
+        payload: key
+      })
+    }}>
+      <Tabs.TabPane tab="CHỌN GHẾ & THANH TOÁN" key="1">
+        <Checkout {...props} />
+      </Tabs.TabPane>
+      <Tabs.TabPane tab="KẾT QUẢ ĐẶT VÉ" key="2">
+        <KetQuaDatVe {...props} />
+      </Tabs.TabPane>
+      <Tabs.TabPane tab={<NavLink className='text-lg text-white' to='/home'>Back to home</NavLink>} key='3'>
 
   const operations = (
     <Fragment>
@@ -369,7 +400,6 @@ const App = (props) => {
   );
 };
 export default App;
-
 const KetQuaDatVe = (props) => {
   const dispatch = useDispatch();
   const { thongTinNguoiDung } = useSelector(

@@ -5,7 +5,7 @@ import { Select } from 'antd';
 import { useTranslation } from 'react-i18next';
 import _ from 'lodash';
 import { useSelector } from 'react-redux';
-import { TOKEN, USER_LOGIN } from '../../../../util/settings/config';
+import { ACCESS_TOKEN, USER_LOGIN } from '../../../../util/settings/config';
 
 const { Option } = Select;
 
@@ -39,7 +39,7 @@ const Header = (props) => {
             </button>
             <button className="text-green-500 mr-5" onClick={() => {
                 localStorage.removeItem(USER_LOGIN);
-                localStorage.removeItem(TOKEN);  
+                localStorage.removeItem(ACCESS_TOKEN);  
                 history.push('/home');
                 window.location.reload();
             }}>Đăng xuất</button>
@@ -59,10 +59,16 @@ const Header = (props) => {
                         {/* activeClasName để khi bấm vào nó tự hiện border bottom */}
                     </li>
                     <li className="flex">
-                        <NavLink to='/contact' rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-white" activeClassName='border-b-2 border-white'>Contact</NavLink>
+                        <NavLink to='/profile' rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-white" activeClassName='border-b-2 border-white'>Profile</NavLink>
                     </li>
                     <li className="flex">
-                        <NavLink to='/news' rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-white" activeClassName='border-b-2 border-white'>News</NavLink>
+                        <a rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-white" activeClassName='border-b-2 border-white' onClick={() => {
+                            if(userLogin.maLoaiNguoiDung !== 'QuanTri') {
+                                alert('Bạn không đủ quyền truy cập hoặc chưa đăng nhập!!')
+                            } else {
+                            history.push('/admin')
+                            }
+                        }}>Admin pages</a>
                     </li>
                 </ul>
                 <div className="items-center flex-shrink-0 hidden lg:flex">

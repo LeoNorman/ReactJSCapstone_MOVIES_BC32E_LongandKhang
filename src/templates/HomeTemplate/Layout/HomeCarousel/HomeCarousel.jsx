@@ -16,31 +16,36 @@ const contentStyle = {
 };
 
 const HomeCarousel = (props) => {
-  const { arrImg } = useSelector((state) => state.carouselReducer);
-  // console.log("arrImg: ", arrImg);
+    const {arrImg} = useSelector(state => state.carouselReducer)
+    // console.log("arrImg: ", arrImg);
 
-  const dispatch = useDispatch();
+    const dispatch = useDispatch()
 
-  //Tự kích hoạt khi component load ra
-  useEffect(() => {
-    //1 action = {type:'', data}
-    //2 (phải cài Middleware): callBackFunction (dispatch)
-    dispatch(carouselAction.getCarouselAction());
-  }, []);
+    //Tự kích hoạt khi component load ra
+    useEffect( () => {
 
-  const renderImg = () => {
-    return arrImg.map((item, index) => {
-      return (
-        <div key={index}>
-          <div
-            style={{ ...contentStyle, backgroundImage: `url(${item.hinhAnh})` }}
-          >
-            <img
-              src={item.hinhAnh}
-              className="w-full opacity-0"
-              alt={item.hinhAnh}
-            />
-          </div>
+        //1 action = {type:'', data}
+        //2 (phải cài Middleware): callBackFunction (dispatch)
+        dispatch(carouselAction.getCarouselAction())
+    }, [])
+
+
+    const renderImg = () => {
+        return arrImg?.map((item, index) => {
+            return <div key={index}>
+            <div style={{...contentStyle, backgroundImage: `url(${item.hinhAnh})`}}>
+                <img src={item.hinhAnh} className='w-full opacity-0' alt={item.hinhAnh} />
+            </div>
+        </div>
+        })
+    }
+
+    return (
+        <div>
+             {/* carousel của ant design */}
+            <Carousel effect="fade">
+                {renderImg()}
+            </Carousel>
         </div>
       );
     });
