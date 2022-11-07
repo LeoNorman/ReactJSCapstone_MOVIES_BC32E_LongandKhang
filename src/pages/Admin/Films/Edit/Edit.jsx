@@ -58,14 +58,15 @@ const Edit = (props) => {
                 }
             }
             //Gọi api gửi các giá trị formdata về backend xử lý
-            dispatch(quanLyPhimAction.capNhatPhimUploadAction(formData))
+            dispatch(quanLyPhimAction.capNhatPhimUploadAction(formData, props.match.params.id))
         }
     })
 
-    const handleChangeDatePicker = (value) => {
-        // console.log("value: ", moment(value).format('DD/MM/YYYY')
-        let ngayKhoiChieu = moment(value)
-        return formik.setFieldValue('ngayKhoiChieu', ngayKhoiChieu)
+    const handleChangeDatePicker = (vl, blaa) => {
+        console.log("value: ", vl);
+        console.log('blaa: ', blaa);
+        // let ngayChieu = vl.format('DD/MM/YYYY')
+        return formik.setFieldValue('ngayKhoiChieu', blaa)
     }
 
     const handleChangeSwitch = (name) => {
@@ -135,7 +136,7 @@ const Edit = (props) => {
                 <Input name='moTa' onChange={formik.handleChange} value={formik.values.moTa} />
             </Form.Item>
             <Form.Item label="Ngày khởi chiếu">
-                <DatePicker format={'DD-MM-YYYY'} onChange={handleChangeDatePicker} value={moment(formik.values.ngayKhoiChieu)} />
+                <DatePicker format={'DD/MM/YYYY'} placeholder='Chọn ngày' onChange={handleChangeDatePicker} defaultValue={moment(formik.values.ngayKhoiChieu)} />
             </Form.Item>
             <Form.Item label="Đang chiếu">
                 <Switch onChange={handleChangeSwitch('dangChieu')} checked={formik.values.dangChieu} />

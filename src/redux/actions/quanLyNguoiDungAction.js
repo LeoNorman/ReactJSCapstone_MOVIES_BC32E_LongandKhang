@@ -2,6 +2,7 @@ import { quanLyNguoiDungService } from "../../services/QuanLyNguoiDungService"
 import { DANG_NHAP_ACTION, SET_DANH_SACH_NGUOI_DUNG, SET_THONG_TIN_NGUOI_DUNG, SET_THONG_TIN_NGUOI_DUNG_EDIT, SET_THONG_TIN_USER_EDIT } from "./types/quanLyNguoiDungType";
 import { history } from '../../App'
 import { GROUPID } from "../../util/settings/config";
+import { DISPLAY_LOADING, HIDE_LOADING } from "./types/loadingType";
 
 export const quanLyNguoiDungAction = {
     dangNhapAction: (thongTinDangNhap) => {
@@ -13,11 +14,13 @@ export const quanLyNguoiDungAction = {
                         type: DANG_NHAP_ACTION,
                         thongTinDangNhap: result.data.content
                     });
+                    alert('Đăng nhập thành công!')
                     //Chuyển hướng đăng nhập về trang trước đó
-                    history.goBack();
+                    history.push('/home');
                 }
             } catch (errors) {
-                console.log('errors: ', errors);
+                console.log('errors: ', errors.reponse?.data);
+                alert('Đăng nhập thất bại')
             }
         }
     },
@@ -34,7 +37,7 @@ export const quanLyNguoiDungAction = {
 
                 }
             } catch (errors) {
-                console.log('errors: ', errors);
+                console.log('errors: ', errors.reponse?.data);
             }
         }
     },
@@ -48,6 +51,7 @@ export const quanLyNguoiDungAction = {
                 }
             } catch (errors) {
                 console.log('errors: ', errors.reponse?.data);
+                alert('Đăng ký thất bại!')
             }
         }
     },
@@ -99,17 +103,24 @@ export const quanLyNguoiDungAction = {
         }
     },
 
-    layThongTinNguoiDungEditAction: (taiKhoan) => {
+    layThongTinAdminEditAction: (taiKhoan) => {
         return async (dispatch) => {
+            dispatch({
+                type: DISPLAY_LOADING,
+            })
+            alert('Bạn đợi xíu chờ server load lên thông tin rồi mới edit nhá!')
             try {
-                const result = await quanLyNguoiDungService.layThongTinNguoiDungEdit(taiKhoan)
+                const result = await quanLyNguoiDungService.layThongTinAdminEdit(taiKhoan)
                 if (result.data.statusCode === 200) {
                     // console.log('result: ', result.data.content);
-                    dispatch({
+                    await dispatch({
                         type: SET_THONG_TIN_NGUOI_DUNG_EDIT,
                         thongTinNguoiDungEdit: result.data.content
                     });
-
+                    await dispatch({
+                        type: HIDE_LOADING
+                    })
+                    alert('Đã load thông tin xong, giờ bạn có thể edit!!')
                 }
             } catch (errors) {
                 console.log('errors: ', errors);
@@ -119,15 +130,22 @@ export const quanLyNguoiDungAction = {
 
     layThongTinUserEditAction: (taiKhoan) => {
         return async (dispatch) => {
+            dispatch({
+                type: DISPLAY_LOADING,
+            })
+            alert('Bạn đợi xíu chờ server load lên thông tin rồi mới edit nhá!')
             try {
                 const result = await quanLyNguoiDungService.layThongTinNguoiDungEdit(taiKhoan)
                 if (result.data.statusCode === 200) {
                     // console.log('result: ', result.data.content);
-                    dispatch({
+                    await dispatch({
                         type: SET_THONG_TIN_USER_EDIT,
                         thongTinUserEdit: result.data.content
                     });
-
+                    await dispatch({
+                        type: HIDE_LOADING
+                    })
+                    alert('Đã load thông tin xong, giờ bạn có thể edit!!')
                 }
             } catch (errors) {
                 console.log('errors: ', errors);
@@ -140,6 +158,7 @@ export const quanLyNguoiDungAction = {
 
             try {
                 let result = await quanLyNguoiDungService.capNhatThongTinNguoiDung(thongTinNguoiDung)
+                window.confirm('bạn có chắc muốn lưu thay đổi này?')
                 alert('Cập nhật thông tin người dùng thành công!')
                 // console.log('result: ', result.data.content);
                 dispatch(quanLyNguoiDungAction.layDanhSachNguoiDungAction(GROUPID, ''))
@@ -157,6 +176,7 @@ export const quanLyNguoiDungAction = {
             try {
                 let result = await quanLyNguoiDungService.capNhatThongTinUser(thongTinNguoiDung)
                 // console.log('result: ', result.data.content);
+                window.confirm('Bạn có chắc muốn lưu thay đổi này?')
                 alert('Cập nhật thông tin tài khoản này thành công!')
                 dispatch(quanLyNguoiDungAction.layThongTinUserEditAction(thongTinNguoiDung.taiKhoan))
             } catch (errors) {

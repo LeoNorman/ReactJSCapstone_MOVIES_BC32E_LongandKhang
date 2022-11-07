@@ -14,7 +14,7 @@ const EditUser = (props) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const action = quanLyNguoiDungAction.layThongTinNguoiDungEditAction(props.match.params.id)
+    const action = quanLyNguoiDungAction.layThongTinAdminEditAction(props.match.params.id)
     dispatch(action)
   }, [])
 

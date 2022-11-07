@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { history } from '../../App'
 import { quanLyNguoiDungAction } from '../../redux/actions/quanLyNguoiDungAction'
 import { GROUPID } from '../../util/settings/config'
+import { KetQuaDatVe } from '../Checkout/Checkout';
 
 
 const InforUser = (props) => {
@@ -107,13 +108,13 @@ const InforUser = (props) => {
 
 const Profile = (props) => {
   return (
-    <div className='pt-20 px-5 bg-black h-screen'>
+    <div className='pt-20 px-5 bg-black'>
       <Tabs defaultActiveKey="1">
         <Tabs.TabPane tab="THÔNG TIN CÁ NHÂN" key="1">
           <InforUser {...props} />
         </Tabs.TabPane>
         <Tabs.TabPane tab="LỊCH SỬ ĐẶT VÉ" key="2">
-          <LichSuDatVe {...props} />
+          <KetQuaDatVe />
         </Tabs.TabPane>
       </Tabs>
     </div>

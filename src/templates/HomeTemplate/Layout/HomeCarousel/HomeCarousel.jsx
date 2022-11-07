@@ -31,7 +31,7 @@ const HomeCarousel = (props) => {
 
 
     const renderImg = () => {
-        return arrImg.map((item, index) => {
+        return arrImg?.map((item, index) => {
             return <div key={index}>
             <div style={{...contentStyle, backgroundImage: `url(${item.hinhAnh})`}}>
                 <img src={item.hinhAnh} className='w-full opacity-0' alt={item.hinhAnh} />

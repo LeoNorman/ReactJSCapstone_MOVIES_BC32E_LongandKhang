@@ -13,7 +13,7 @@ import { quanLyNguoiDungAction } from '../../redux/actions/quanLyNguoiDungAction
 import moment from 'moment';
 import { history } from '../../App';
 import { NavLink } from 'react-router-dom';
-import { TOKEN, USER_LOGIN } from '../../util/settings/config';
+import { ACCESS_TOKEN, USER_LOGIN } from '../../util/settings/config';
 
 const Checkout = (props) => {
 
@@ -229,7 +229,7 @@ const App = (props) => {
           </div>Hello ! <span className='text-orange-500'>{userLogin.taiKhoan}</span></button>
         <button className="text-green-500" onClick={()=>{
             localStorage.removeItem(USER_LOGIN);
-            localStorage.removeItem(TOKEN);
+            localStorage.removeItem(ACCESS_TOKEN);
             history.push('/home');
             window.location.reload();
         }}>Đăng xuất</button>
@@ -259,7 +259,7 @@ const App = (props) => {
 };
 export default App;
 
-const KetQuaDatVe = (props) => {
+export const KetQuaDatVe = (props) => {
   const dispatch = useDispatch()
   const { thongTinNguoiDung } = useSelector(state => state.quanLyNguoiDungReducer)
   const { userLogin } = useSelector(state => state.quanLyNguoiDungReducer)

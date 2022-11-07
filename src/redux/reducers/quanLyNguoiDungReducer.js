@@ -1,4 +1,4 @@
-import { TOKEN, USER_LOGIN } from "../../util/settings/config"
+import { ACCESS_TOKEN, USER_LOGIN } from "../../util/settings/config"
 import { DANG_NHAP_ACTION, SET_DANH_SACH_NGUOI_DUNG, SET_THONG_TIN_NGUOI_DUNG, SET_THONG_TIN_NGUOI_DUNG_EDIT, SET_THONG_TIN_USER_EDIT } from "../actions/types/quanLyNguoiDungType"
 
 let user = {};
@@ -19,7 +19,7 @@ export const quanLyNguoiDungReducer = (state = stateDefault, action) => {
         case DANG_NHAP_ACTION : {
             const {thongTinDangNhap} = action;
             localStorage.setItem(USER_LOGIN,JSON.stringify(thongTinDangNhap));
-            localStorage.setItem(TOKEN,thongTinDangNhap.accessToken);
+            localStorage.setItem(ACCESS_TOKEN,thongTinDangNhap.accessToken);
             return {...state,userLogin:thongTinDangNhap}
         }
 
