@@ -30,7 +30,11 @@ export const quanLyNguoiDungService = {
         return api.delete(`QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`)
     },
 
-    layThongTinNguoiDungEdit: (taiKhoan) => {
+    layThongTinNguoiDungEdit: () => {
+        return api.post(`QuanLyNguoiDung/ThongTinTaiKhoan`)
+    },
+
+    layThongTinAdminEdit: (taiKhoan) => {
         return api.post(`QuanLyNguoiDung/LayThongTinNguoiDung?taiKhoan=${taiKhoan}`)
     },
 

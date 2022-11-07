@@ -1,15 +1,16 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import _ from 'lodash'
+import { AppleOutlined, FacebookOutlined } from '@ant-design/icons'
 
 const Footer = (props) => {
-    const {heThongRapChieu} = useSelector(state => state.quanLyRapReducer) 
+    const { heThongRapChieu } = useSelector(state => state.quanLyRapReducer)
     // console.log("heThongRapChieu: ", heThongRapChieu);
     const arrHeThongRap = _.map(heThongRapChieu, (heThongRap) => _.pick(heThongRap, ['maHeThongRap', 'tenHeThongRap', 'logo']))
-    
+
     // console.log("arrHeThongRap: ", arrHeThongRap);
     return (
-        <div>
+        <div className=''>
             <footer className="py-6 text-gray-100 bg-gray-900">
                 <div className="container px-6 mx-auto space-y-6 divide-y divide-gray-400 md:space-y-12 divide-opacity-50">
                     <div className="grid grid-cols-12">
@@ -22,33 +23,25 @@ const Footer = (props) => {
                         </div>
                         <div className="col-span-6 text-center md:text-left md:col-span-3">
                             <p className="pb-1 text-lg font-medium">PARTNER</p>
-                            <div style={{color:'#ffffff'}} className='grid grid-cols-3 gap-2'>
+                            <div style={{ color: '#ffffff' }} className='grid grid-cols-3 gap-2'>
                                 {arrHeThongRap.map((htr, index) => {
                                     return <div key={index}>
-                                        <img style={{width:'50px'}} src={htr.logo} alt="logo" className='w-full' />
+                                        <img style={{ width: '50px' }} src={htr.logo} alt="logo" className='w-full' />
                                     </div>
                                 })}
                             </div>
                         </div>
                         <div className="col-span-6 text-center md:text-left md:col-span-3">
                             <p className="pb-1 text-lg font-medium">Mobile App</p>
-                            <ul>
-                                <li>
-                                    <a rel="noopener noreferrer" href="#" className="hover:text-violet-600">Link</a>
-                                </li>
-                                <li>
-                                    <a rel="noopener noreferrer" href="#" className="hover:text-violet-600">Link</a>
-                                </li>
-                                <li>
-                                    <a rel="noopener noreferrer" href="#" className="hover:text-violet-600">Link</a>
-                                </li>
-                                <li>
-                                    <a rel="noopener noreferrer" href="#" className="hover:text-violet-600">Link</a>
-                                </li>
-                                <li>
-                                    <a rel="noopener noreferrer" href="#" className="hover:text-violet-600">Link</a>
-                                </li>
-                            </ul>
+                            <div className="flex text-white">
+                                <div className="mr-5">
+                                    <AppleOutlined className="text-2xl" />
+                                </div>
+                                <div>
+                                    <FacebookOutlined className="text-2xl" />
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                     <div className="grid justify-center pt-6 lg:justify-between">
@@ -60,7 +53,6 @@ const Footer = (props) => {
                     </div>
                 </div>
             </footer>
-
         </div>
     )
 }

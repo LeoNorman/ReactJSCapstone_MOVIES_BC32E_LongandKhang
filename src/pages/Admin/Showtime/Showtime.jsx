@@ -4,6 +4,7 @@ import { quanLyRapService } from '../../../services/QuanLyRapService';
 import { useFormik } from 'formik';
 import moment from 'moment';
 import { quanLyDatVeService } from '../../../services/QuanLyDatVeService';
+import { history } from '../../../App';
 
 const Showtime = (props) => {
 

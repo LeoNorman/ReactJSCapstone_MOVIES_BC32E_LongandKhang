@@ -3,6 +3,7 @@ import { Route } from 'react-router'
 import {
     DesktopOutlined,
     FileOutlined,
+    HomeOutlined,
     MenuFoldOutlined,
     MenuUnfoldOutlined,
     UploadOutlined,
@@ -14,7 +15,7 @@ import './AdminTemplate.css'
 import { NavLink } from 'react-router-dom';
 import SubMenu from 'antd/lib/menu/SubMenu';
 import _ from 'lodash'
-import { TOKEN, USER_LOGIN } from '../../util/settings/config';
+import { ACCESS_TOKEN, USER_LOGIN } from '../../util/settings/config';
 import { useSelector } from 'react-redux';
 import { history } from '../../App';
 
@@ -43,7 +44,7 @@ const AdminTemplate = (props) => {
             history.push('/profile')
         }}> <div style={{ width: 50, height: 50, display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="text-2xl ml-5 rounded-full bg-red-200">{userLogin.taiKhoan.substr(0, 1)}</div>Hello! <span className='text-blue-500'>{userLogin.taiKhoan}</span></button> <button onClick={() => {
             localStorage.removeItem(USER_LOGIN);
-            localStorage.removeItem(TOKEN);
+            localStorage.removeItem(ACCESS_TOKEN);
             history.push('/home');
             window.location.reload();
         }} className="text-blue-800">Đăng xuất</button> </Fragment> : ''}
@@ -78,6 +79,9 @@ const AdminTemplate = (props) => {
 
                             </Menu.Item>
                         </SubMenu>
+                        <Menu.Item key="99" icon={<HomeOutlined />}>
+                            <NavLink to="/home">Back to home</NavLink>
+                        </Menu.Item>
                         {/* <Menu.Item key="3" icon={<DesktopOutlined />}>
                             <NavLink to="/admin/films/showtime">Showtime</NavLink>
 

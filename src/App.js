@@ -23,7 +23,7 @@ import Edit from "./pages/Admin/Films/Edit/Edit";
 import AddUser from "./pages/Admin/Users/AddUser/AddUser";
 import EditUser from "./pages/Admin/Users/Edit/EditUser";
 
-const CheckoutTemplateLazy = lazy(() => import('./templates/CheckoutTemplate/CheckoutTemplate'))
+// const CheckoutTemplateLazy = lazy(() => import('./templates/CheckoutTemplate/CheckoutTemplate'))
 
 export const history = createBrowserHistory()
 
