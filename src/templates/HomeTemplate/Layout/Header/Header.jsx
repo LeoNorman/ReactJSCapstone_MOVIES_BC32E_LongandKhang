@@ -73,17 +73,6 @@ const Header = (props) => {
                 </ul>
                 <div className="items-center flex-shrink-0 hidden lg:flex">
                     {renderLogin()}
-                    <Select
-                        defaultValue="en"
-                        style={{
-                            width: 70,
-                        }}
-                        onChange={handleChange}
-                    >
-                        <Option value="en">Eng</Option>
-                        <Option value="vi">Vi</Option>
-                        <Option value="chi">Chi</Option>
-                    </Select>
                 </div>
                 <button className="p-4 lg:hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 text-gray-800">
