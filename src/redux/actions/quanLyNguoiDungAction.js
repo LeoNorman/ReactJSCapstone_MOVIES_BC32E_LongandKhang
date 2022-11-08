@@ -7,19 +7,28 @@ import { DISPLAY_LOADING, HIDE_LOADING } from "./types/loadingType";
 export const quanLyNguoiDungAction = {
     dangNhapAction: (thongTinDangNhap) => {
         return async (dispatch) => {
+            await dispatch({
+                type: DISPLAY_LOADING,
+            })
             try {
                 const result = await quanLyNguoiDungService.dangNhap(thongTinDangNhap)
                 if (result.data.statusCode === 200) {
-                    dispatch({
+                    await dispatch({
                         type: DANG_NHAP_ACTION,
                         thongTinDangNhap: result.data.content
                     });
+                    await dispatch({
+                        type: HIDE_LOADING,
+                    })
                     alert('Đăng nhập thành công!')
                     //Chuyển hướng đăng nhập về trang trước đó
                     history.push('/home');
                 }
             } catch (errors) {
                 console.log('errors: ', errors.reponse?.data);
+                await dispatch({
+                    type: HIDE_LOADING,
+                })
                 alert('Đăng nhập thất bại')
             }
         }
@@ -43,14 +52,24 @@ export const quanLyNguoiDungAction = {
     },
     dangKyAction: (thongTinNguoiDung) => {
         return async (dispatch) => {
+            await dispatch({
+                type: DISPLAY_LOADING,
+            })
             try {
                 const result = await quanLyNguoiDungService.dangKy(thongTinNguoiDung)
                 if (result.data.statusCode === 200) {
                     // console.log('result: ', result.data.content);
+                    await dispatch({
+                        type: HIDE_LOADING,
+                    })
                     alert('Đăng ký thành công!')
+                    history.push('/login')
                 }
             } catch (errors) {
                 console.log('errors: ', errors.reponse?.data);
+                await dispatch({
+                    type: HIDE_LOADING,
+                })
                 alert('Đăng ký thất bại!')
             }
         }
@@ -130,7 +149,7 @@ export const quanLyNguoiDungAction = {
 
     layThongTinUserEditAction: (taiKhoan) => {
         return async (dispatch) => {
-            dispatch({
+            await dispatch({
                 type: DISPLAY_LOADING,
             })
             alert('Bạn đợi xíu chờ server load lên thông tin rồi mới edit nhá!')
@@ -172,14 +191,20 @@ export const quanLyNguoiDungAction = {
 
     capNhatThongTinUserAction: (thongTinNguoiDung) => {
         return async (dispatch) => {
-
+            await dispatch({
+                type: DISPLAY_LOADING,
+            })
             try {
                 let result = await quanLyNguoiDungService.capNhatThongTinUser(thongTinNguoiDung)
                 // console.log('result: ', result.data.content);
-                window.confirm('Bạn có chắc muốn lưu thay đổi này?')
+                await dispatch({
+                    type: HIDE_LOADING,
+                })
                 alert('Cập nhật thông tin tài khoản này thành công!')
-                dispatch(quanLyNguoiDungAction.layThongTinUserEditAction(thongTinNguoiDung.taiKhoan))
             } catch (errors) {
+                await dispatch({
+                    type: HIDE_LOADING,
+                })
                 alert('Cập nhật thất bại do lỗi gì đó từ server!')
                 console.log("errors: ", errors.reponse?.data);
             }

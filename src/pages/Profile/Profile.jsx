@@ -7,6 +7,7 @@ import { history } from '../../App'
 import { quanLyNguoiDungAction } from '../../redux/actions/quanLyNguoiDungAction'
 import { GROUPID } from '../../util/settings/config'
 import { KetQuaDatVe } from '../Checkout/Checkout';
+import * as Yup from 'yup'
 
 
 const InforUser = (props) => {
@@ -39,6 +40,22 @@ const InforUser = (props) => {
         dispatch(action)
       }
     },
+    validationSchema: Yup.object({
+      hoTen: Yup.string()
+        .min(2, "Họ tên ít nhất 2 ký tự!")
+        .max(32, "Họ tên nhiều nhất 32 ký tự!")
+        .required("Không được bỏ trống!"),
+      email: Yup.string()
+        .email("Email phải đúng định dạng!")
+        .required("Không được bỏ trống!"),
+      matKhau: Yup.string()
+        .min(6, "Mật khẩu ít nhất 6 ký tự!")
+        .required("Không được bỏ trống!"),
+      soDt: Yup.string()
+        .min(9, "Số điện thoại ít nhất 9 ký tự!")
+        .max(16, "Số điện thoại nhiều nhất 16 ký tự!")
+        .required("Không được bỏ trống!"),
+    })
   })
 
 
@@ -66,6 +83,9 @@ const InforUser = (props) => {
                 <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i className="mdi mdi-email-outline text-gray-400 text-lg" /></div>
                 <input type="email" name='email' onChange={formik.handleChange} value={formik.values.email} className="text-black w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="nguyenvana@gmail.com" />
               </div>
+              {formik.errors.email && formik.touched.email && (
+                <p>{formik.errors.email}</p>
+              )}
             </div>
           </div>
           <div className="flex -mx-3 mr-2">
@@ -75,6 +95,9 @@ const InforUser = (props) => {
                 <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i className="mdi mdi-email-outline text-gray-400 text-lg" /></div>
                 <input type="password" name='matKhau' onChange={formik.handleChange} value={formik.values.matKhau} className="text-black w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="Nhập mật khẩu" />
               </div>
+              {formik.errors.matKhau && formik.touched.matKhau && (
+                <p>{formik.errors.matKhau}</p>
+              )}
             </div>
           </div>
           <div className="flex -mx-3">
@@ -84,6 +107,9 @@ const InforUser = (props) => {
                 <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i className="mdi mdi-email-outline text-gray-400 text-lg" /></div>
                 <input type="text" name='hoTen' onChange={formik.handleChange} value={formik.values.hoTen} className="text-black w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="nguyenvana@gmail.com" />
               </div>
+              {formik.errors.hoTen && formik.touched.hoTen && (
+                <p>{formik.errors.hoTen}</p>
+              )}
             </div>
           </div>
           <div className="flex -mx-3 mr-2">
@@ -93,6 +119,9 @@ const InforUser = (props) => {
                 <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i className="mdi mdi-lock-outline text-gray-400 text-lg" /></div>
                 <input type="tel" name='soDt' onChange={formik.handleChange} value={formik.values.soDt} className="text-black w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="************" />
               </div>
+              {formik.errors.soDt && formik.touched.soDt && (
+                <p>{formik.errors.soDt}</p>
+              )}
             </div>
           </div>
           <div className="flex -mx-3 mt-5">
