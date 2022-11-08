@@ -329,7 +329,6 @@ const App = (props) => {
 </Tabs.TabPane>
       </Tabs>
     </div>
-  );
 };
 export default App;
 export const KetQuaDatVe = (props) => {
