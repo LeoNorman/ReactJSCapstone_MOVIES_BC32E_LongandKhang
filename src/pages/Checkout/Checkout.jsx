@@ -326,81 +326,13 @@ const App = (props) => {
         <KetQuaDatVe {...props} />
       </Tabs.TabPane>
       <Tabs.TabPane tab={<NavLink className='text-lg text-white' to='/home'>Back to home</NavLink>} key='3'>
-
-  const operations = (
-    <Fragment>
-      {!_.isEmpty(userLogin) ? (
-        <Fragment>
-          <button
-            onClick={() => {
-              history.push("/profile");
-            }}
-          >
-            <div
-              style={{
-                width: 50,
-                height: 50,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-              className="text-2xl ml-3 rounded-full bg-blue-500"
-            >
-              {userLogin.taiKhoan.substr(0, 1)}
-            </div>
-            Hello !{" "}
-            <span className="text-orange-500">{userLogin.taiKhoan}</span>
-          </button>
-          <button
-            className="text-green-500"
-            onClick={() => {
-              localStorage.removeItem(USER_LOGIN);
-              localStorage.removeItem(TOKEN);
-              history.push("/home");
-              window.location.reload();
-            }}
-          >
-            Đăng xuất
-          </button>
-        </Fragment>
-      ) : (
-        ""
-      )}
-    </Fragment>
-  );
-  return (
-    <div className="p-5 bg-black">
-      <Tabs
-        tabBarExtraContent={operations}
-        defaultActiveKey="1"
-        activeKey={tabActive.toString()}
-        onChange={(key) => {
-          dispatch({
-            type: CHANGE_TAB_ACTIVE,
-            payload: key,
-          });
-        }}
-      >
-        <Tabs.TabPane tab="CHỌN GHẾ & THANH TOÁN" key="1">
-          <Checkout {...props} />
-        </Tabs.TabPane>
-        <Tabs.TabPane tab="KẾT QUẢ ĐẶT VÉ" key="2">
-          <KetQuaDatVe {...props} />
-        </Tabs.TabPane>
-        <Tabs.TabPane
-          tab={
-            <NavLink className="text-lg text-white" to="/home">
-              Back to home
-            </NavLink>
-          }
-          key="3"
-        ></Tabs.TabPane>
+</Tabs.TabPane>
       </Tabs>
     </div>
   );
 };
 export default App;
-const KetQuaDatVe = (props) => {
+export const KetQuaDatVe = (props) => {
   const dispatch = useDispatch();
   const { thongTinNguoiDung } = useSelector(
     (state) => state.quanLyNguoiDungReducer
