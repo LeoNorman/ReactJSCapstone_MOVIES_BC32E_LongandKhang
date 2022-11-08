@@ -39,18 +39,6 @@ const HomeCarousel = (props) => {
         </div>
         })
     }
-
-    return (
-        <div>
-             {/* carousel của ant design */}
-            <Carousel effect="fade">
-                {renderImg()}
-            </Carousel>
-        </div>
-      );
-    });
-  };
-
   return (
     <div>
       {/* carousel của ant design */}
