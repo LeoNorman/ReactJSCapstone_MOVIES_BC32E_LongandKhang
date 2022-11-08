@@ -1,15 +1,13 @@
 import { createBrowserHistory } from "history";
 import { Router, Switch, Route } from "react-router";
 import Checkout from "./pages/Checkout/Checkout";
-import Contact from "./pages/Contact/Contact";
 import Detail from "./pages/Detail/Detail";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
-import News from "./pages/News/News";
 import Register from "./pages/Register/Register";
 import CheckoutTemplate from "./templates/CheckoutTemplate/CheckoutTemplate";
 import HomeTemplate from "./templates/HomeTemplate/HomeTemplate";
-import { Suspense, lazy } from 'react'
+// import { Suspense, lazy } from 'react'
 import UserTemplate from "./templates/UserTemplate/UserTemplate";
 import Loading from "./components/Loading/Loading";
 import { useSelector } from "react-redux";
@@ -38,8 +36,6 @@ function App() {
       <Switch>
         <HomeTemplate path='/' exact Component={Home} />
         <HomeTemplate path='/home' exact Component={Home} />
-        <HomeTemplate path='/contact' exact Component={Contact} />
-        <HomeTemplate path='/news' exact Component={News} />
         <HomeTemplate path='/detail/:id' exact Component={Detail} />
         <HomeTemplate path='/profile' exact Component={Profile} />
         <UserTemplate path='/login' exact Component={Login} />
